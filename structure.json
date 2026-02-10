@@ -1,0 +1,237 @@
+{
+  "name": "habits-map",
+  "path": "C:\\Users\\user\\Desktop\\personal\\habits-map",
+  "relativePath": ".",
+  "type": "directory",
+  "children": [
+    {
+      "name": ".gitignore",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\.gitignore",
+      "relativePath": ".gitignore",
+      "type": "file",
+      "size": 340
+    },
+    {
+      "name": ".prettierrc",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\.prettierrc",
+      "relativePath": ".prettierrc",
+      "type": "file",
+      "size": 354
+    },
+    {
+      "name": ".vscode",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\.vscode",
+      "relativePath": ".vscode",
+      "type": "directory",
+      "children": [
+        {
+          "name": "settings.json",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\.vscode\\settings.json",
+          "relativePath": ".vscode/settings.json",
+          "type": "file",
+          "size": 1337
+        }
+      ]
+    },
+    {
+      "name": "eslint.config.js",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\eslint.config.js",
+      "relativePath": "eslint.config.js",
+      "type": "file",
+      "size": 1003
+    },
+    {
+      "name": "index.html",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\index.html",
+      "relativePath": "index.html",
+      "type": "file",
+      "size": 359
+    },
+    {
+      "name": "package-lock.json",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\package-lock.json",
+      "relativePath": "package-lock.json",
+      "type": "file",
+      "size": 126081
+    },
+    {
+      "name": "package.json",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\package.json",
+      "relativePath": "package.json",
+      "type": "file",
+      "size": 745
+    },
+    {
+      "name": "public",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\public",
+      "relativePath": "public",
+      "type": "directory",
+      "children": [
+        {
+          "name": "vite.svg",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\public\\vite.svg",
+          "relativePath": "public/vite.svg",
+          "type": "file",
+          "size": 1497
+        }
+      ]
+    },
+    {
+      "name": "README.md",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\README.md",
+      "relativePath": "README.md",
+      "type": "file",
+      "size": 2555
+    },
+    {
+      "name": "scripts",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\scripts",
+      "relativePath": "scripts",
+      "type": "directory",
+      "children": [
+        {
+          "name": "generate-structure.js",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\scripts\\generate-structure.js",
+          "relativePath": "scripts/generate-structure.js",
+          "type": "file",
+          "size": 2046
+        }
+      ]
+    },
+    {
+      "name": "src",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src",
+      "relativePath": "src",
+      "type": "directory",
+      "children": [
+        {
+          "name": "App.css",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\App.css",
+          "relativePath": "src/App.css",
+          "type": "file",
+          "size": 606
+        },
+        {
+          "name": "App.tsx",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\App.tsx",
+          "relativePath": "src/App.tsx",
+          "type": "file",
+          "size": 903
+        },
+        {
+          "name": "assets",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\assets",
+          "relativePath": "src/assets",
+          "type": "directory",
+          "children": [
+            {
+              "name": "react.svg",
+              "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\assets\\react.svg",
+              "relativePath": "src/assets/react.svg",
+              "type": "file",
+              "size": 4126
+            }
+          ]
+        },
+        {
+          "name": "components",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\components",
+          "relativePath": "src/components",
+          "type": "directory",
+          "children": []
+        },
+        {
+          "name": "constants",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\constants",
+          "relativePath": "src/constants",
+          "type": "directory",
+          "children": []
+        },
+        {
+          "name": "hooks",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\hooks",
+          "relativePath": "src/hooks",
+          "type": "directory",
+          "children": []
+        },
+        {
+          "name": "index.css",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\index.css",
+          "relativePath": "src/index.css",
+          "type": "file",
+          "size": 1154
+        },
+        {
+          "name": "main.tsx",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\main.tsx",
+          "relativePath": "src/main.tsx",
+          "type": "file",
+          "size": 230
+        },
+        {
+          "name": "pages",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\pages",
+          "relativePath": "src/pages",
+          "type": "directory",
+          "children": []
+        },
+        {
+          "name": "types",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\types",
+          "relativePath": "src/types",
+          "type": "directory",
+          "children": []
+        },
+        {
+          "name": "utils",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\utils",
+          "relativePath": "src/utils",
+          "type": "directory",
+          "children": []
+        },
+        {
+          "name": "vite-env.d.ts",
+          "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\src\\vite-env.d.ts",
+          "relativePath": "src/vite-env.d.ts",
+          "type": "file",
+          "size": 170
+        }
+      ]
+    },
+    {
+      "name": "stylelint.config.mjs",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\stylelint.config.mjs",
+      "relativePath": "stylelint.config.mjs",
+      "type": "file",
+      "size": 113
+    },
+    {
+      "name": "tsconfig.app.json",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\tsconfig.app.json",
+      "relativePath": "tsconfig.app.json",
+      "type": "file",
+      "size": 798
+    },
+    {
+      "name": "tsconfig.json",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\tsconfig.json",
+      "relativePath": "tsconfig.json",
+      "type": "file",
+      "size": 107
+    },
+    {
+      "name": "tsconfig.node.json",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\tsconfig.node.json",
+      "relativePath": "tsconfig.node.json",
+      "type": "file",
+      "size": 653
+    },
+    {
+      "name": "vite.config.ts",
+      "path": "C:\\Users\\user\\Desktop\\personal\\habits-map\\vite.config.ts",
+      "relativePath": "vite.config.ts",
+      "type": "file",
+      "size": 384
+    }
+  ]
+}
