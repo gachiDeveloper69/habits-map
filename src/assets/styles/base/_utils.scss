@@ -1,0 +1,12 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.page {
+  min-height: 100vh;
+  padding: 72px 0 40px; // top space for theme button
+}
+
+.container {
+  width: min(var(--container-max), calc(100% - (var(--container-pad) * 2)));
+  margin: 0 auto;
+}

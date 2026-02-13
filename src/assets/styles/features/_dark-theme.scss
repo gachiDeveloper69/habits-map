@@ -1,7 +1,13 @@
+@use '../base/core' as *;
+
 [data-theme='dark'] {
+  color-scheme: dark;
+
   --bg-page: #121212;
   --bg-card: #1a1a1a;
   --text-primary: #f1f1f1;
   --text-secondary: #a1a1a1;
   --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.4);
 }

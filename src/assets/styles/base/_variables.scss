@@ -1,1 +1,20 @@
 @use 'media' as *;
+:root {
+  --bg-page: #f8f6f3;
+  --bg-card: #ffffff;
+  --text-primary: #2b2b2b;
+  --text-secondary: #6b6b6b;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+
+  --rating-minus: #c47a6d;
+  --rating-neutral: #8fa3b8;
+  --rating-plus: #8fbf9b;
+
+  --radius-card: 14px;
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+  --container-max: 720px;
+  --container-pad: 16px;
+
+  --font: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}

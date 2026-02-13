@@ -1,3 +1,5 @@
+@use '../base/core' as *;
+
 .minus {
   border-color: rgba(196, 122, 109, var(--rating-border-opacity));
   background: rgba(196, 122, 109, var(--rating-bg-opacity));

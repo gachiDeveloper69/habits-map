@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9 11 50 42">
+  <!-- Orbit 1 -->
+  <ellipse cx="32" cy="32" rx="20" ry="12"
+           fill="none"
+           stroke="#8fa3b8"
+           stroke-width="3.4"/>
+
+  <!-- Orbit 2 -->
+  <ellipse cx="32" cy="32" rx="20" ry="12"
+           fill="none"
+           stroke="#8fa3b8"
+           stroke-width="3.4"
+           transform="rotate(60 32 32)"/>
+
+  <!-- Neutral nucleus -->
+  <circle cx="32" cy="32" r="8" fill="#8fa3b8"/>
+
+  <!-- Positive particle -->
+  <circle cx="52" cy="32" r="5.2" fill="#8fbf9b"/>
+  <path d="M50.8 32 H53.2 M52 30.8 V33.2"
+        stroke="#ffffff"
+        stroke-width="2.2"
+        stroke-linecap="round"/>
+
+  <!-- Negative particle -->
+  <circle cx="18" cy="32" r="5.2" fill="#c47a6d"/>
+  <path d="M16.8 32 H19.2"
+        stroke="#ffffff"
+        stroke-width="2.2"
+        stroke-linecap="round"/>
+</svg>

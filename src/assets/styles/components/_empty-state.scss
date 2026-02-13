@@ -1,0 +1,46 @@
+@use '../base/core' as *;
+
+.emptyState {
+  margin-top: 10vh;
+  text-align: center;
+
+  padding: 28px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+ l
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.emptyTitle {
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+
+.emptyText {
+  margin: 0 0 18px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.primaryButton {
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+
+  border: 1px solid var(--border-subtle);
+  background: var(--text-primary);
+  color: var(--bg-card);
+
+  font-weight: 600;
+  letter-spacing: -0.01em;
+
+  cursor: pointer;
+}
+
+[data-theme='dark'] .primaryButton {
+  background: #f1f1f1;
+  color: #121212;
+}

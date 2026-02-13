@@ -6,4 +6,9 @@
 @forward './base/globals';
 
 //components
+@forward './components/add-button';
+@forward './components/habit-card';
+@forward './components/theme-toggle';
 //features
+@forward './features/dark-theme';
+@forward './features/rating-states';
