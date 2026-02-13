@@ -1,0 +1,17 @@
+.minus {
+  border-color: rgba(196, 122, 109, var(--rating-border-opacity));
+  background: rgba(196, 122, 109, var(--rating-bg-opacity));
+  box-shadow: var(--shadow-soft), var(--glow-minus);
+}
+
+.neutral {
+  border-color: rgba(143, 163, 184, var(--rating-border-opacity));
+  background: rgba(143, 163, 184, var(--rating-bg-opacity));
+  box-shadow: var(--shadow-soft), var(--glow-neutral);
+}
+
+.plus {
+  border-color: rgba(143, 191, 155, var(--rating-border-opacity));
+  background: rgba(143, 191, 155, var(--rating-bg-opacity));
+  box-shadow: var(--shadow-soft), var(--glow-plus);
+}

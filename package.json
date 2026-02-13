@@ -7,7 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "sass:watch": "sass --watch src/assets/styles/main.scss:src/assets/styles/main.css",
+    "scan": "node scripts/generate-structure.js"
   },
   "dependencies": {
     "eslint-plugin-react": "^7.37.5",

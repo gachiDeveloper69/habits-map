@@ -1,0 +1,32 @@
+.addButton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  background: var(--bg-card);
+  border: 1px dashed var(--border-subtle);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  display: grid;
+  place-items: center;
+}
+
+.habitRowActive .addButton {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.addAbove {
+  top: -16px;
+}
+
+.addBelow {
+  bottom: -16px;
+}
