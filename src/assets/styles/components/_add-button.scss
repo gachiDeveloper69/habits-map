@@ -1,6 +1,6 @@
 @use '../base/core' as *;
 
-.addButton {
+.add-button {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -20,7 +20,7 @@
   place-items: center;
 }
 
-.habitRowActive .addButton {
+.habitRowActive .add-button {
   opacity: 1;
   pointer-events: auto;
 }

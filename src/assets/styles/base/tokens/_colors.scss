@@ -1,17 +1,10 @@
 :root {
-  /* light */
+  /* page, text*/
   --bg-page: #f8f6f3;
   --bg-card: #ffffff;
-  --text-primary: #2b2b2b;
-  --text-secondary: #6b6b6b;
+  --text-primary: #262626;
+  --text-secondary: #6f6a63;
   --border-subtle: rgba(0, 0, 0, 0.06);
-
-  /* dark */
-  --bg-page: #121212;
-  --bg-card: #1a1a1a;
-  --text-primary: #f1f1f1;
-  --text-secondary: #a1a1a1;
-  --border-subtle: rgba(255, 255, 255, 0.08);
 
   /*Rating palette*/
   --rating-minus: #c47a6d; // dusty terracotta
@@ -27,8 +20,8 @@
   --glow-plus: 0 0 0 3px rgba(143, 191, 155, 0.25);
 
   /*shadows*/
-  // --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.06);//light
-  // --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.4);//dark
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.06); //light
+  // //dark
 
   /*scales*/
   --radius-card: 14px;
@@ -36,4 +29,38 @@
 
   --row-height: 52px; // mobile-friendly
   --gap-vertical: 12px;
+
+  /* PRIMARY BUTTON */
+  --btn-primary-bg: #2b2b2b;
+  --btn-primary-text: #ffffff;
+  --btn-primary-border: transparent;
+
+  --btn-primary-bg-hover: #1f1f1f;
+  --btn-primary-bg-active: #151515;
+
+  /* GHOST BUTTON */
+  --btn-ghost-bg: transparent;
+  --btn-ghost-text: var(--text-primary);
+  --btn-ghost-border: var(--border-subtle);
+
+  --btn-ghost-bg-hover: rgba(0, 0, 0, 0.04);
+
+  /* EMPTY CTA (Start button) */
+  --cta-bg: rgba(250, 232, 229, 0.75); // blush wash
+  --cta-border: rgba(196, 122, 109, 0.22); // dusty terracotta border
+  --cta-ring: rgba(196, 122, 109, 0.18);
+  --cta-shadow: 0 12px 28px rgba(196, 122, 109, 0.1);
+  --cta-bg-hover: rgba(250, 232, 229, 0.92);
+  --cta-border-hover: rgba(196, 122, 109, 0.3);
+  --cta-title-color: rgba(196, 122, 109, 0.92);
+
+  /*THEME SWITCH*/
+  --toggle-bg: rgba(52, 59, 163, 0.096);
+  --toggle-border: rgba(0, 0, 0, 0.205);
+  --toggle-icon: rgba(52, 59, 163, 0.534);
+
+  --toggle-bg-hover: rgba(52, 59, 163, 0.281);
+  --toggle-icon-hover: rgb(52, 59, 163);
+
+  --toggle-ring: rgba(131, 155, 180, 0.521);
 }

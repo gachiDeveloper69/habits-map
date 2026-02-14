@@ -1,6 +1,6 @@
 @use '../base/core' as *;
 
-.themeToggle {
+.theme-toggle {
   position: fixed;
   top: 16px;
   right: 16px;
@@ -10,8 +10,8 @@
   height: 42px;
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid var(--border-subtle);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(10px);
 
@@ -20,14 +20,53 @@
 
   cursor: pointer;
   transition:
-    transform 0.15s ease,
-    background 0.25s ease;
+    transform 0.12s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+
+  &__icon {
+    color: var(--toggle-icon);
+    stroke: currentColor;
+
+    width: 18px;
+    height: 18px;
+
+    transition: color 0.18s ease;
+  }
+
+  &:hover {
+    background: var(--toggle-bg-hover);
+
+    &__icon {
+      color: var(--toggle-icon-hover);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    box-shadow:
+      var(--shadow-soft),
+      0 0 0 3px var(--toggle-ring);
+
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 
-[data-theme='dark'] .themeToggle {
-  background: rgba(26, 26, 26, 0.65);
+.theme-toggle:hover .theme-toggle__icon {
+  color: var(--toggle-icon-hover);
 }
 
-.themeToggle:active {
-  transform: scale(0.96);
+[data-theme='dark'] .theme-toggle {
+  // background: rgba(26, 26, 26, 0.65);
+  // border: 1px solid rgba(57, 52, 128, 0.863);
+  &:focus-visible {
+    box-shadow:
+      var(--shadow-soft),
+      0 0 0 3px rgba(143, 163, 184, 0.28);
+  }
 }

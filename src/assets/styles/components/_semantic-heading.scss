@@ -1,0 +1,5 @@
+@use '../base/core' as *;
+
+.semantic-heading {
+  @include visually-hidden;
+}

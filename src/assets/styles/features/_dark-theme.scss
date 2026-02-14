@@ -3,11 +3,46 @@
 [data-theme='dark'] {
   color-scheme: dark;
 
+  /* page, text*/
   --bg-page: #121212;
   --bg-card: #1a1a1a;
   --text-primary: #f1f1f1;
-  --text-secondary: #a1a1a1;
+  --text-secondary: rgba(241, 241, 241, 0.68);
   --border-subtle: rgba(255, 255, 255, 0.08);
 
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.4);
+
+  /* PRIMARY BUTTON */
+  --btn-primary-bg: #f1f1f1;
+  --btn-primary-text: #121212;
+  --btn-primary-border: transparent;
+
+  --btn-primary-bg-hover: #ffffff;
+  --btn-primary-bg-active: #e5e5e5;
+
+  /* GHOST BUTTON */
+  --btn-ghost-bg: transparent;
+  --btn-ghost-text: var(--text-primary);
+  --btn-ghost-border: var(--border-subtle);
+
+  --btn-ghost-bg-hover: rgba(255, 255, 255, 0.08);
+
+  /* EMPTY CTA (Start button) */
+  --cta-bg: rgba(196, 122, 109, 0.12);
+  --cta-border: rgba(196, 122, 109, 0.22);
+  --cta-ring: rgba(196, 122, 109, 0.16);
+  --cta-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  --cta-bg-hover: rgba(196, 122, 109, 0.18);
+  --cta-border-hover: rgba(196, 122, 109, 0.28);
+  --cta-title-color: var(--text-primary);
+
+  /*THEME SWITCH*/
+  --toggle-bg: rgba(26, 26, 26, 0.65);
+  --toggle-border: rgba(255, 255, 255, 0.1);
+  --toggle-icon: rgba(241, 241, 241, 0.568);
+
+  --toggle-bg-hover: rgba(75, 75, 75, 0.438);
+  --toggle-icon-hover: rgb(241, 241, 241);
+
+  --toggle-ring: rgba(143, 163, 184, 0.28);
 }

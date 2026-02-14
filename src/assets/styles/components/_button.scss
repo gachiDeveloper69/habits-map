@@ -1,0 +1,50 @@
+@use '../base/core' as *;
+.button {
+  height: 44px;
+  padding: 0 16px;
+
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* PRIMARY */
+  &--primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border-color: var(--btn-primary-border);
+
+    &:hover {
+      background: var(--btn-primary-bg-hover);
+    }
+
+    &:active {
+      background: var(--btn-primary-bg-active);
+      transform: scale(0.98);
+    }
+  }
+
+  /* GHOST */
+  &--ghost {
+    background: var(--btn-ghost-bg);
+    color: var(--btn-ghost-text);
+    border-color: var(--btn-ghost-border);
+
+    &:hover {
+      background: var(--btn-ghost-bg-hover);
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
