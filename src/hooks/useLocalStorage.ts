@@ -19,21 +19,29 @@ import { useState, useEffect } from 'react';
 
 //Дженерик-функция для работы с любым типом данных
 export function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
-
-  //инициализация из хранилища при монтировании
-  useEffect(() => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
-      if (item) {
-        const parsed = JSON.parse(item);
-        setStoredValue(parsed);
-      }
+      return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.log(`Error reading localStorage key "${key}":`, error);
-      throw error;
+      return initialValue;
     }
-  }, [key, initialValue]);
+  });
+
+  //инициализация из хранилища при монтировании
+  // useEffect(() => {
+  //   try {
+  //     const item = window.localStorage.getItem(key);
+  //     if (item) {
+  //       const parsed = JSON.parse(item);
+  //       setStoredValue(parsed);
+  //     }
+  //   } catch (error) {
+  //     console.log(`Error reading localStorage key "${key}":`, error);
+  //     throw error;
+  //   }
+  // }, [key, initialValue]);
 
   //Обертка для setStoredValue которая сохраняет в localStorage
   const setValue = (value: T | ((val: T) => T)) => {

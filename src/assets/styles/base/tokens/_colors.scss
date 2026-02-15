@@ -19,6 +19,17 @@
   --glow-neutral: 0 0 0 3px rgba(143, 163, 184, 0.25);
   --glow-plus: 0 0 0 3px rgba(143, 191, 155, 0.25);
 
+  /* surfaces */
+  --bg-surface: var(--bg-page);
+  --bg-card: #ffffff;
+  --bg-card-elevated: #fffdfb; // чуть теплее/светлее, чем bg-card
+
+  /*card*/
+  --border-card: rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
+  --accent-blush: rgba(196, 122, 109, 0.1); // light
+  --accent-blush-border: rgba(196, 122, 109, 0.18);
+
   /*shadows*/
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.06); //light
   // //dark
@@ -55,12 +66,17 @@
   --cta-title-color: rgba(196, 122, 109, 0.92);
 
   /*THEME SWITCH*/
-  --toggle-bg: rgba(52, 59, 163, 0.096);
+  --toggle-bg: rgba(250, 232, 229, 0.411);
   --toggle-border: rgba(0, 0, 0, 0.205);
-  --toggle-icon: rgba(52, 59, 163, 0.534);
+  --toggle-icon: rgba(196, 122, 109, 0.658);
 
-  --toggle-bg-hover: rgba(52, 59, 163, 0.281);
-  --toggle-icon-hover: rgb(52, 59, 163);
+  --toggle-bg-hover: rgba(250, 232, 229, 0.808);
+  --toggle-icon-hover: rgba(196, 122, 109, 0.884);
 
   --toggle-ring: rgba(131, 155, 180, 0.521);
+
+  /* drag handle */
+  --drag-color: rgba(38, 38, 38, 0.671);
+  --drag-color-hover: rgb(38, 38, 38);
+  --drag-bg-hover: rgba(0, 0, 0, 0.04);
 }

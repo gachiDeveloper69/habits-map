@@ -1,0 +1,203 @@
+@use '../../base/core' as *;
+.habit-row {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+
+  height: var(--row-height);
+  padding: 10px 14px;
+
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-card);
+
+  box-shadow: var(--shadow-card);
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+
+  position: relative;
+
+  &--active {
+    // transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: var(--bg-card-elevated);
+    border: 1px solid var(--accent-blush-border);
+    z-index: 10;
+  }
+
+  &__title {
+    flex: 1;
+    font-size: 16px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  &__drag {
+    transition: all 0.25s;
+    color: var(--drag-color);
+    height: 100%;
+    aspect-ratio: 1;
+    width: auto;
+    opacity: 0.4;
+    cursor: grab;
+    user-select: none;
+
+    @include hover {
+      color: var(--drag-color-hover);
+    }
+
+    & svg {
+      fill: currentColor;
+    }
+  }
+  &__toggle {
+    height: 100%;
+    aspect-ratio: 1;
+    width: auto;
+  }
+
+  //controls
+  &__actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none; // Чтобы не мешали кликам по карточке
+  }
+
+  &__action-button {
+    position: absolute;
+    pointer-events: auto;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Пружинка */
+  }
+
+  &__action-button--left {
+    left: -5%;
+    top: 50%;
+    transform: translateY(-50%) translateX(0);
+    animation: slideFromLeft 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    @include hover {
+      transform: scale(1.1) translateY(-50%) translateX(0);
+    }
+  }
+
+  &__action-button--right {
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%) translateX(0);
+    animation: slideFromRight 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    @include hover {
+      transform: scale(1.1) translateY(-50%) translateX(0);
+    }
+  }
+
+  &__action-button--top {
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    animation: slideFromTop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    @include hover {
+      transform: scale(1.1) translateY(0) translateX(-50%);
+    }
+  }
+
+  &__action-button--bottom {
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    animation: slideFromBottom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    @include hover {
+      transform: scale(1.1) translateY(0) translateX(-50%);
+    }
+  }
+}
+
+/* Анимации */
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+@keyframes slideFromTop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Ховер эффект для кнопок */
+// .habit-row__action-button:hover {
+//   transform: scale(1.1) translateY(-50%) translateX(0);
+// }
+
+/* Адаптив для тач-устройств */
+@media (hover: none) {
+  .habit-row__action-button {
+    width: 44px; /* Больше область для тапа */
+    height: 44px;
+  }
+}
+
+/* Анимация самой карточки при активации/деактивации */
+.habit-row {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.habit-row:not(.habit-row--active) .habit-row__action-button {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

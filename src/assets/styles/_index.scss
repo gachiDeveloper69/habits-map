@@ -9,9 +9,13 @@
 @forward './components/semantic-heading';
 @forward './components/button';
 @forward './components/add-button';
-@forward './components/habit-card';
-@forward './components/theme-toggle';
-@forward './components/empty-state';
+
 //features
-@forward './features/dark-theme';
-@forward './features/rating-states';
+
+//features/theme
+@forward './features/theme/dark-theme';
+@forward './features/theme/theme-toggle';
+//features/habits-row
+@forward './features/habits-row/habit-card';
+@forward './features/habits-row/empty-state';
+@forward './features/habits-row/rating-states';
