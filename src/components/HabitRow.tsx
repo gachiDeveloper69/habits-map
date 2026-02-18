@@ -5,12 +5,13 @@ import MockToggle from '@/icons/mock-toggle.svg?react';
 import Plus from '@/icons/plus.svg?react';
 import Edit from '@/icons/edit.svg?react';
 import Delete from '@/icons/delete.svg?react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface HabitRowProps {
   habit: HabitItem;
-  onActivate?: () => void;
-  onDeactivate?: () => void;
+  isActive: boolean;
+  onActivate: () => void;
+  onDeactivate: () => void;
   onEdit?: () => void;
   onDelete: (id: string) => void;
   onAddSideBy: (index: number) => void;
@@ -18,16 +19,16 @@ interface HabitRowProps {
 
 export function HabitRow({
   habit,
+  isActive,
+  onEdit,
   onActivate,
   onDeactivate,
-  onEdit,
   onDelete,
   onAddSideBy,
 }: HabitRowProps) {
-  const [isActive, setIsActive] = useState(false);
-  const [touchStartY, setTouchStartY] = useState(0);
-  const [isTouchMove, SetIsTouchMove] = useState(false);
-  const [touchStartTime, setTouchStartTime] = useState(0);
+  const [touchStart, setTouchStart] = useState({ x: 0, y: 0, time: 0 });
+  const [isTouchMove, setIsTouchMove] = useState(false);
+  const [isMouseDown, setIsMouseDown] = useState(false);
   const rowRef = useRef<HTMLElement>(null);
 
   const actionButtons = [
@@ -61,41 +62,64 @@ export function HabitRow({
     },
   ];
 
-  //закрытие по клику снаружи
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (rowRef.current && !rowRef.current.contains(event.target as Node)) {
-        handleDeactivate();
-      }
-    };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Не реагируем на клики по интерактивным элементам
+    const target = e.target as HTMLElement;
+    const isActionButton = target.closest('.habit-row__action-button');
+    const isDrag = target.closest('.habit-row__drag');
+    const isToggle = target.closest('.habit-row__toggle');
 
-    if (isActive) {
-      document.addEventListener('mousedown', handleClickOutside);
+    if (!isActionButton && !isDrag && !isToggle) {
+      setIsMouseDown(true);
     }
+  };
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isActive]);
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (isMouseDown) {
+      // Проверяем что это был именно клик, а не выделение текста
+      const target = e.target as HTMLElement;
+      const isActionButton = target.closest('.habit-row__action-button');
+      const isDrag = target.closest('.habit-row__drag');
+      const isToggle = target.closest('.habit-row__toggle');
+
+      if (!isActionButton && !isDrag && !isToggle) {
+        handleCardToggle();
+      }
+    }
+    setIsMouseDown(false);
+  };
+
+  const handleMouseMove = () => {
+    // Если мышь двигается - это не клик
+    if (isMouseDown) {
+      setIsMouseDown(false);
+    }
+  };
 
   //защита от тапов при скролле
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartY(e.touches[0].clientY);
-    SetIsTouchMove(false);
-    setTouchStartTime(Date.now());
+    const touch = e.touches[0];
+    setTouchStart({
+      x: touch.clientX,
+      y: touch.clientY,
+      time: Date.now(),
+    });
+    setIsTouchMove(false);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    const currentY = e.touches[0].clientY;
-    const diff = Math.abs(currentY - touchStartY);
+    const touch = e.touches[0];
+    const diffX = Math.abs(touch.clientX - touchStart.x);
+    const diffY = Math.abs(touch.clientY - touchStart.y);
 
-    if (diff > 10) {
-      SetIsTouchMove(true);
+    // Если движение больше 10px в любую сторону - это скролл/свайп
+    if (diffX > 10 || diffY > 10) {
+      setIsTouchMove(true);
     }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchDuration = Date.now() - touchStartTime;
+    const touchDuration = Date.now() - touchStart.time;
 
     if (!isTouchMove && touchDuration < 300) {
       handleCardToggle();
@@ -104,20 +128,9 @@ export function HabitRow({
 
   const handleCardToggle = () => {
     if (isActive) {
-      handleDeactivate();
+      onDeactivate();
     } else {
-      handleActivate();
-    }
-  };
-
-  const handleCardClick = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    const isActionButton = target.closest('.habit-row__action-button');
-    const isDrag = target.closest('.habit-row__drag');
-    const isToggle = target.closest('.habit-row__toggle');
-
-    if (!isActionButton && !isDrag && !isToggle) {
-      handleCardToggle();
+      onActivate();
     }
   };
 
@@ -131,25 +144,31 @@ export function HabitRow({
     // console.log('Переключить статус');
   };
 
-  const handleActivate = useCallback(() => {
-    if (!isActive) {
-      setIsActive(true);
-      onActivate?.();
-    }
-  }, [isActive, onActivate]);
+  //закрытие по клику снаружи
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (rowRef.current && !rowRef.current.contains(event.target as Node)) {
+        onDeactivate();
+      }
+    };
 
-  const handleDeactivate = useCallback(() => {
     if (isActive) {
-      setIsActive(false);
-      onDeactivate?.();
+      document.addEventListener('mousedown', handleClickOutside);
     }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [isActive, onDeactivate]);
 
   return (
     <article
       ref={rowRef}
       className={clsx('habit-row', `row-${habit.rating}`, { 'habit-row--active': isActive })}
-      onClick={handleCardClick}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setIsMouseDown(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -163,24 +182,28 @@ export function HabitRow({
       </div>
 
       {/* CONTROLS */}
-      {isActive && (
-        <div className="habit-row__actions">
-          {actionButtons.map(({ id, icon: Icon, position, action, label }) => (
-            <button
-              key={id}
-              className={clsx('habit-row__action-button', `habit-row__action-button--${position}`)}
-              onClick={e => {
-                e.stopPropagation();
-                action();
-                handleDeactivate(); // Опционально: закрыть после действия
-              }}
-              aria-label={label}
-            >
-              <Icon />
-            </button>
-          ))}
-        </div>
-      )}
+
+      <div className="habit-row__actions">
+        {actionButtons.map(({ id, icon: Icon, position, action, label }) => (
+          <button
+            key={id}
+            className={clsx(
+              'habit-row__action-button',
+              `habit-row__action-button--${id}`,
+              isActive ? `habit-row__action-button--active` : `habit-row__action-button--inactive`,
+              `habit-row__action-button--${position}`
+            )}
+            onClick={e => {
+              e.stopPropagation();
+              action();
+              onDeactivate(); // Опционально: закрыть после действия
+            }}
+            aria-label={label}
+          >
+            <Icon />
+          </button>
+        ))}
+      </div>
     </article>
   );
 }

@@ -54,7 +54,7 @@ body {
   /*card*/
   --border-card: rgba(0, 0, 0, 0.08);
   --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
-  --accent-blush: rgba(196, 122, 109, 0.1);
+  --accent-blush: rgba(231, 46, 13, 0.904);
   --accent-blush-border: rgba(196, 122, 109, 0.18);
   /*shadows*/
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.06);
@@ -93,6 +93,24 @@ body {
   --drag-color: rgba(38, 38, 38, 0.671);
   --drag-color-hover: rgb(38, 38, 38);
   --drag-bg-hover: rgba(0, 0, 0, 0.04);
+  /* ACTION CONTROLS (habit row buttons) */
+  --ctrl-bg: rgba(255, 255, 255, 0.92);
+  --ctrl-border: rgba(0, 0, 0, 0.1);
+  --ctrl-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  --ctrl-bg-hover: rgba(255, 255, 255, 0.98);
+  --ctrl-border-hover: rgba(0, 0, 0, 0.14);
+  --ctrl-shadow-hover: 0 12px 34px rgba(0, 0, 0, 0.14);
+  --ctrl-icon-neutral: rgba(38, 38, 38, 0.78);
+  --ctrl-icon-neutral-hover: rgba(38, 38, 38, 0.92);
+  /* semantic icons */
+  --ctrl-icon-danger: rgba(196, 122, 109, 0.88); /* dusty terracotta */
+  --ctrl-icon-danger-hover: rgba(196, 122, 109, 1);
+  --ctrl-icon-positive: rgba(143, 191, 155, 0.88); /* sage */
+  --ctrl-icon-positive-hover: rgba(143, 191, 155, 1);
+  /* rings (subtle) */
+  --ctrl-ring-neutral: rgba(143, 163, 184, 0.26);
+  --ctrl-ring-danger: rgba(196, 122, 109, 0.3);
+  --ctrl-ring-positive: rgba(143, 191, 155, 0.28);
 }
 
 :root {
@@ -438,9 +456,25 @@ svg * {
   --border-card: rgba(255, 255, 255, 0.1);
   --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.55);
   /* drag */
-  --drag-color: rgba(241, 241, 241, 0.4);
-  --drag-color-hover: rgba(241, 241, 241, 0.78);
+  --drag-color: rgb(182, 182, 182);
+  --drag-color-hover: rgb(255, 255, 255);
   --drag-bg-hover: rgba(255, 255, 255, 0.06);
+  /* ACTION CONTROLS (habit row buttons) */
+  --ctrl-bg: rgba(26, 26, 26, 0.86);
+  --ctrl-border: rgba(255, 255, 255, 0.16); /* было 0.10 — теперь отделяемся от card */
+  --ctrl-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+  --ctrl-bg-hover: rgba(32, 32, 32, 0.92);
+  --ctrl-border-hover: rgba(255, 255, 255, 0.22);
+  --ctrl-shadow-hover: 0 18px 42px rgba(0, 0, 0, 0.72);
+  --ctrl-icon-neutral: rgba(241, 241, 241, 0.78);
+  --ctrl-icon-neutral-hover: rgba(241, 241, 241, 0.92);
+  --ctrl-icon-danger: rgba(196, 122, 109, 0.88);
+  --ctrl-icon-danger-hover: rgba(196, 122, 109, 1);
+  --ctrl-icon-positive: rgba(143, 191, 155, 0.88);
+  --ctrl-icon-positive-hover: rgba(143, 191, 155, 1);
+  --ctrl-ring-neutral: rgba(143, 163, 184, 0.28);
+  --ctrl-ring-danger: rgba(196, 122, 109, 0.32);
+  --ctrl-ring-positive: rgba(143, 191, 155, 0.3);
 }
 
 .theme-toggle {
@@ -491,7 +525,8 @@ svg * {
 }
 
 .habit-row {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --actions-offset-inline: -5%;
+  --actions-offset-block: -28px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -502,12 +537,12 @@ svg * {
   border-radius: var(--radius-card);
   border: 1px solid var(--border-card);
   box-shadow: var(--shadow-card);
-  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
   position: relative;
 }
-.habit-row--active {
+.habit-row.habit-row--active {
   transform: scale(1.02);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px var(--accent-blush-border);
   background: var(--bg-card-elevated);
   border: 1px solid var(--accent-blush-border);
   z-index: 10;
@@ -561,125 +596,178 @@ svg * {
 .habit-row__action-button {
   position: absolute;
   pointer-events: auto;
-  border: none;
-  background: white;
+  background: var(--ctrl-bg);
+  border: 1px solid var(--ctrl-border);
+  box-shadow: var(--ctrl-shadow);
+  color: var(--ctrl-icon-neutral);
   border-radius: 50%;
   width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Пружинка */
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease, opacity 0.2s ease, filter 0.2s ease;
+}
+.habit-row__action-button--inactive {
+  opacity: 0;
+  pointer-events: none;
+}
+.habit-row__action-button--active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 .habit-row__action-button--left {
-  left: -5%;
+  left: var(--actions-offset-inline);
   top: 50%;
-  transform: translateY(-50%) translateX(0);
-  animation: slideFromLeft 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-@media (hover: hover) {
-  .habit-row__action-button--left:hover {
-    transform: scale(1.1) translateY(-50%) translateX(0);
-  }
-}
-@media (hover: none) {
-  .habit-row__action-button--left:active {
-    transform: scale(1.1) translateY(-50%) translateX(0);
-  }
+  transform: translateY(-50%) translateX(0) scale(1);
 }
 .habit-row__action-button--right {
-  right: -5%;
+  right: var(--actions-offset-inline);
   top: 50%;
-  transform: translateY(-50%) translateX(0);
-  animation: slideFromRight 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-@media (hover: hover) {
-  .habit-row__action-button--right:hover {
-    transform: scale(1.1) translateY(-50%) translateX(0);
-  }
-}
-@media (hover: none) {
-  .habit-row__action-button--right:active {
-    transform: scale(1.1) translateY(-50%) translateX(0);
-  }
+  transform: translateY(-50%) translateX(0) scale(1);
 }
 .habit-row__action-button--top {
-  top: -28px;
+  top: var(--actions-offset-block);
   left: 50%;
-  transform: translateX(-50%) translateY(0);
-  animation: slideFromTop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-@media (hover: hover) {
-  .habit-row__action-button--top:hover {
-    transform: scale(1.1) translateY(0) translateX(-50%);
-  }
-}
-@media (hover: none) {
-  .habit-row__action-button--top:active {
-    transform: scale(1.1) translateY(0) translateX(-50%);
-  }
+  transform: translateX(-50%) translateY(0) scale(1);
 }
 .habit-row__action-button--bottom {
-  bottom: -28px;
+  bottom: var(--actions-offset-block);
   left: 50%;
-  transform: translateX(-50%) translateY(0);
-  animation: slideFromBottom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateX(-50%) translateY(0) scale(1);
 }
+.habit-row__action-button--inactive.habit-row__action-button--left {
+  transform: translateY(-50%) translateX(18px) scale(0.85);
+}
+.habit-row__action-button--inactive.habit-row__action-button--right {
+  transform: translateY(-50%) translateX(-18px) scale(0.85);
+}
+.habit-row__action-button--inactive.habit-row__action-button--top {
+  transform: translateX(-50%) translateY(18px) scale(0.85);
+}
+.habit-row__action-button--inactive.habit-row__action-button--bottom {
+  transform: translateX(-50%) translateY(-18px) scale(0.85);
+}
+
 @media (hover: hover) {
-  .habit-row__action-button--bottom:hover {
-    transform: scale(1.1) translateY(0) translateX(-50%);
+  .habit-row__action-button--active.habit-row__action-button--left:hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
   }
 }
 @media (hover: none) {
-  .habit-row__action-button--bottom:active {
-    transform: scale(1.1) translateY(0) translateX(-50%);
+  .habit-row__action-button--active.habit-row__action-button--left:active {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
   }
 }
 
-/* Анимации */
-@keyframes slideFromLeft {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
+@media (hover: hover) {
+  .habit-row__action-button--active.habit-row__action-button--right:hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
   }
 }
-@keyframes slideFromRight {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
+@media (hover: none) {
+  .habit-row__action-button--active.habit-row__action-button--right:active {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
   }
 }
-@keyframes slideFromTop {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+
+@media (hover: hover) {
+  .habit-row__action-button--active.habit-row__action-button--top:hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
   }
 }
-@keyframes slideFromBottom {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+@media (hover: none) {
+  .habit-row__action-button--active.habit-row__action-button--top:active {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
   }
 }
-/* Ховер эффект для кнопок */
+
+@media (hover: hover) {
+  .habit-row__action-button--active.habit-row__action-button--bottom:hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
+  }
+}
+@media (hover: none) {
+  .habit-row__action-button--active.habit-row__action-button--bottom:active {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
+  }
+}
+
+.habit-row__action-button--delete {
+  color: var(--ctrl-icon-danger);
+}
+.habit-row__action-button--delete svg {
+  fill: currentColor;
+}
+@media (hover: hover) {
+  .habit-row__action-button--delete:hover {
+    color: var(--ctrl-icon-danger-hover);
+    box-shadow: var(--ctrl-shadow-hover), 0 0 0 1px var(--ctrl-ring-danger);
+  }
+}
+@media (hover: none) {
+  .habit-row__action-button--delete:active {
+    color: var(--ctrl-icon-danger-hover);
+    box-shadow: var(--ctrl-shadow-hover), 0 0 0 1px var(--ctrl-ring-danger);
+  }
+}
+
+.habit-row__action-button--addAbove,
+.habit-row__action-button--addBelow {
+  color: var(--ctrl-icon-positive);
+}
+.habit-row__action-button--addAbove svg,
+.habit-row__action-button--addBelow svg {
+  fill: currentColor;
+}
+@media (hover: hover) {
+  .habit-row__action-button--addAbove:hover,
+  .habit-row__action-button--addBelow:hover {
+    color: var(--ctrl-icon-positive-hover);
+    box-shadow: var(--ctrl-shadow-hover), 0 0 0 1px var(--ctrl-ring-positive);
+  }
+}
+@media (hover: none) {
+  .habit-row__action-button--addAbove:active,
+  .habit-row__action-button--addBelow:active {
+    color: var(--ctrl-icon-positive-hover);
+    box-shadow: var(--ctrl-shadow-hover), 0 0 0 1px var(--ctrl-ring-positive);
+  }
+}
+
+.habit-row__action-button--edit {
+  color: var(--ctrl-icon-neutral);
+}
+.habit-row__action-button--edit svg {
+  fill: currentColor;
+}
+@media (hover: hover) {
+  .habit-row__action-button--edit:hover {
+    color: var(--ctrl-icon-neutral-hover);
+    background: var(--ctrl-bg-hover);
+    border-color: var(--ctrl-border-hover);
+    box-shadow: var(--ctrl-shadow-hover), 0 0 0 1px var(--ctrl-ring-neutral);
+  }
+}
+@media (hover: none) {
+  .habit-row__action-button--edit:active {
+    color: var(--ctrl-icon-neutral-hover);
+    background: var(--ctrl-bg-hover);
+    border-color: var(--ctrl-border-hover);
+    box-shadow: var(--ctrl-shadow-hover), 0 0 0 1px var(--ctrl-ring-neutral);
+  }
+}
+
 /* Адаптив для тач-устройств */
 @media (hover: none) {
   .habit-row__action-button {
@@ -687,17 +775,6 @@ svg * {
     height: 44px;
   }
 }
-/* Анимация самой карточки при активации/деактивации */
-.habit-row {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.habit-row:not(.habit-row--active) .habit-row__action-button {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
 .empty-state {
   margin-top: 10vh;
   text-align: center;

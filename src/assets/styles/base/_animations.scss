@@ -1,0 +1,81 @@
+// appearance
+@mixin slide-from(
+  $direction: 'left',
+  $distance: 30px,
+  $duration: 0.3s,
+  $translateX: null,
+  $translateY: null
+) {
+  // Если translate не заданы, используем финальную позицию в зависимости от направления
+  $finalX: if($translateX != null, $translateX, 0);
+  $finalY: if($translateY != null, $translateY, 0);
+  animation: slide-from-#{$direction} $duration cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  @keyframes slide-from-#{$direction} {
+    0% {
+      opacity: 0;
+      transform: translate(
+          if($direction == 'left', -$distance, if($direction == 'right', $distance, 0)),
+          if($direction == 'top', -$distance, if($direction == 'bottom', $distance, 0))
+        )
+        scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translate($finalX, $finalY) scale(1);
+    }
+  }
+}
+
+// disappearance
+@mixin slide-to(
+  $direction: 'left',
+  $distance: 30px,
+  $duration: 0.25s,
+  $translateX: null,
+  $translateY: null
+) {
+  // Если translate не заданы, используем финальную позицию в зависимости от направления
+  $finalX: if($translateX != null, $translateX, 0);
+  $finalY: if($translateY != null, $translateY, 0);
+
+  animation: slide-to-#{$direction} $duration cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  @keyframes slide-to-#{$direction} {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(
+          if($direction == 'left', -$distance, if($direction == 'right', $distance, 0)),
+          if($direction == 'top', -$distance, if($direction == 'bottom', $distance, 0))
+        )
+        scale(0.5);
+    }
+  }
+}
+
+// custom
+@mixin custom-slide(
+  $start-x: 0,
+  $start-y: 0,
+  $start-scale: 0.8,
+  $end-x: 0,
+  $end-y: 0,
+  $end-scale: 1,
+  $duration: 0.3s,
+  $name: 'custom-slide'
+) {
+  @keyframes #{$name} {
+    0% {
+      opacity: 0;
+      transform: translate($start-x, $start-y) scale($start-scale);
+    }
+    100% {
+      opacity: 1;
+      transform: translate($end-x, $end-y) scale($end-scale);
+    }
+  }
+
+  animation: #{$name} $duration cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}

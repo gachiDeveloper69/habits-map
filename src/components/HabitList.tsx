@@ -10,10 +10,27 @@ interface HabitListProps {
 
 export function HabitList({ habits, onHabitDelete, onAddSideBy }: HabitListProps) {
   const [activeHabitId, setActiveHabitId] = useState<string | null>();
+
+  const handleActivate = (id: string) => {
+    setActiveHabitId(prev => (prev === id ? null : id));
+  };
+
+  const handleDeactivate = () => {
+    setActiveHabitId(null);
+  };
+
   return (
     <section className="habit-list">
       {habits.map(h => (
-        <HabitRow key={h.id} habit={h} onAddSideBy={onAddSideBy} onDelete={onHabitDelete} />
+        <HabitRow
+          key={h.id}
+          habit={h}
+          isActive={activeHabitId === h.id}
+          onActivate={() => handleActivate(h.id)}
+          onDeactivate={handleDeactivate}
+          onAddSideBy={onAddSideBy}
+          onDelete={onHabitDelete}
+        />
       ))}
     </section>
   );

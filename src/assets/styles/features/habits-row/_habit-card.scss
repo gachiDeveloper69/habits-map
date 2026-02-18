@@ -1,6 +1,8 @@
 @use '../../base/core' as *;
 .habit-row {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --actions-offset-inline: -5%;
+  --actions-offset-block: -28px;
+
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -18,14 +20,15 @@
     background 0.25s ease,
     box-shadow 0.25s ease,
     border-color 0.25s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     color 0.25s ease;
 
   position: relative;
 
-  &--active {
+  &.habit-row--active {
     // transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: scale(1.02);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px var(--accent-blush-border);
     background: var(--bg-card-elevated);
     border: 1px solid var(--accent-blush-border);
     z-index: 10;
@@ -79,109 +82,155 @@
   &__action-button {
     position: absolute;
     pointer-events: auto;
-    border: none;
-    background: white;
+    background: var(--ctrl-bg);
+    border: 1px solid var(--ctrl-border);
+    box-shadow: var(--ctrl-shadow);
+    color: var(--ctrl-icon-neutral);
     border-radius: 50%;
     width: 36px;
     height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Пружинка */
-  }
 
-  &__action-button--left {
-    left: -5%;
-    top: 50%;
-    transform: translateY(-50%) translateX(0);
-    animation: slideFromLeft 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    @include hover {
-      transform: scale(1.1) translateY(-50%) translateX(0);
+    // ВАЖНО: базовая анимация на трансформацию и прозрачность
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.2s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      opacity 0.2s ease,
+      filter 0.2s ease;
+
+    // ACTIVE/INACTIVE - ьтолько видимость
+    &--inactive {
+      opacity: 0;
+      pointer-events: none;
+      // visibility: hidden; // можно, чтобы не ловить фокус
     }
-  }
 
-  &__action-button--right {
-    right: -5%;
-    top: 50%;
-    transform: translateY(-50%) translateX(0);
-    animation: slideFromRight 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    @include hover {
-      transform: scale(1.1) translateY(-50%) translateX(0);
+    &--active {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
     }
-  }
 
-  &__action-button--top {
-    top: -28px;
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    animation: slideFromTop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    @include hover {
-      transform: scale(1.1) translateY(0) translateX(-50%);
+    // POSITIONS (задают ФИНАЛЬНОЕ положение)
+    &--left {
+      left: var(--actions-offset-inline);
+      top: 50%;
+      transform: translateY(-50%) translateX(0) scale(1);
     }
-  }
 
-  &__action-button--bottom {
-    bottom: -28px;
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    animation: slideFromBottom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    @include hover {
-      transform: scale(1.1) translateY(0) translateX(-50%);
+    &--right {
+      right: var(--actions-offset-inline);
+      top: 50%;
+      transform: translateY(-50%) translateX(0) scale(1);
     }
+
+    &--top {
+      top: var(--actions-offset-block);
+      left: 50%;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    &--bottom {
+      bottom: var(--actions-offset-block);
+      left: 50%;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    // INACTIVE трансформы (откуда вылетают)
+    &--inactive.habit-row__action-button--left {
+      transform: translateY(-50%) translateX(18px) scale(0.85);
+    }
+    &--inactive.habit-row__action-button--right {
+      transform: translateY(-50%) translateX(-18px) scale(0.85);
+    }
+    &--inactive.habit-row__action-button--top {
+      transform: translateX(-50%) translateY(18px) scale(0.85);
+    }
+    &--inactive.habit-row__action-button--bottom {
+      transform: translateX(-50%) translateY(-18px) scale(0.85);
+    }
+
+    // hover/active теперь будет работать стабильно
+    // @include hover {
+    //   transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08);
+    // }
   }
 }
 
-/* Анимации */
-@keyframes slideFromLeft {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(-20px);
+//hover
+.habit-row__action-button--active.habit-row__action-button--left {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
   }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
+}
+.habit-row__action-button--active.habit-row__action-button--right {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
+  }
+}
+.habit-row__action-button--active.habit-row__action-button--top {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
+  }
+}
+.habit-row__action-button--active.habit-row__action-button--bottom {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
   }
 }
 
-@keyframes slideFromRight {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(20px);
+//status indicator
+
+.habit-row__action-button--delete {
+  color: var(--ctrl-icon-danger);
+  & svg {
+    fill: currentColor;
   }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
+  @include hover {
+    color: var(--ctrl-icon-danger-hover);
+    box-shadow:
+      var(--ctrl-shadow-hover),
+      0 0 0 1px var(--ctrl-ring-danger);
   }
 }
-
-@keyframes slideFromTop {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
+.habit-row__action-button--addAbove,
+.habit-row__action-button--addBelow {
+  color: var(--ctrl-icon-positive);
+  & svg {
+    fill: currentColor;
   }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-@keyframes slideFromBottom {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+  @include hover {
+    color: var(--ctrl-icon-positive-hover);
+    box-shadow:
+      var(--ctrl-shadow-hover),
+      0 0 0 1px var(--ctrl-ring-positive);
   }
 }
-
-/* Ховер эффект для кнопок */
-// .habit-row__action-button:hover {
-//   transform: scale(1.1) translateY(-50%) translateX(0);
-// }
+.habit-row__action-button--edit {
+  color: var(--ctrl-icon-neutral);
+  & svg {
+    fill: currentColor;
+  }
+  @include hover {
+    color: var(--ctrl-icon-neutral-hover);
+    background: var(--ctrl-bg-hover);
+    border-color: var(--ctrl-border-hover);
+    box-shadow:
+      var(--ctrl-shadow-hover),
+      0 0 0 1px var(--ctrl-ring-neutral);
+  }
+}
 
 /* Адаптив для тач-устройств */
 @media (hover: none) {
@@ -189,15 +238,4 @@
     width: 44px; /* Больше область для тапа */
     height: 44px;
   }
-}
-
-/* Анимация самой карточки при активации/деактивации */
-.habit-row {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.habit-row:not(.habit-row--active) .habit-row__action-button {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
