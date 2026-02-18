@@ -2,20 +2,25 @@ import type { HabitItem } from '@/types/habits';
 import clsx from 'clsx';
 import DragHandle from '@/icons/drag-handle.svg?react';
 import MockToggle from '@/icons/mock-toggle.svg?react';
-import Plus from '@/icons/plus.svg?react';
-import Edit from '@/icons/edit.svg?react';
-import Delete from '@/icons/delete.svg?react';
+import type { HabitRowControlsState } from '@/components/HabitRowControls';
+
+import { HabitRowControls } from '@/components/HabitRowControls';
+
 import { useEffect, useRef, useState } from 'react';
 
 interface HabitRowProps {
   habit: HabitItem;
   isActive: boolean;
+  // isEditing: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
   onEdit?: () => void;
   onDelete: () => void;
   onAddAbove: () => void;
   onAddBelow: () => void;
+  // onStartEdit: () => void;
+  // onCancelEdit: () => void;
+  // onCommitEdit: (newTitle: string) => void;
 }
 
 export function HabitRow({
@@ -35,37 +40,6 @@ export function HabitRow({
     moved: false,
     pointerId: null as number | null,
   });
-
-  const actionButtons = [
-    {
-      id: 'edit',
-      icon: Edit,
-      position: 'right',
-      action: () => onEdit?.(),
-      label: 'Редактировать',
-    },
-    {
-      id: 'delete',
-      icon: Delete,
-      position: 'left',
-      action: onDelete,
-      label: 'Удалить',
-    },
-    {
-      id: 'addAbove',
-      icon: Plus,
-      position: 'top',
-      action: onAddAbove,
-      label: 'Добавить сверху',
-    },
-    {
-      id: 'addBelow',
-      icon: Plus,
-      position: 'bottom',
-      action: onAddBelow,
-      label: 'Добавить снизу',
-    },
-  ];
 
   const handlePointerDown = (e: React.PointerEvent) => {
     pointerData.current.startX = e.clientX;
@@ -103,6 +77,11 @@ export function HabitRow({
     // console.log('Переключить статус');
   };
 
+  const controlsState = (): HabitRowControlsState => {
+    if (isActive) return 'active';
+    return 'inactive';
+  };
+
   return (
     <article
       ref={rowRef}
@@ -114,34 +93,21 @@ export function HabitRow({
       <div className="habit-row__drag" onPointerDown={handleDragClick}>
         <DragHandle />
       </div>
-      <div className="habit-row__title">{habit.title}</div>
+      <div className="habit-row__title" title={habit.title}>
+        {habit.title}
+      </div>
       <div onPointerDown={handleToggleClick} className="habit-row__toggle">
         <MockToggle />
       </div>
 
       {/* CONTROLS */}
-
-      <div className="habit-row__actions">
-        {actionButtons.map(({ id, icon: Icon, position, action, label }) => (
-          <button
-            key={id}
-            className={clsx(
-              'habit-row__action-button',
-              `habit-row__action-button--${id}`,
-              isActive ? `habit-row__action-button--active` : `habit-row__action-button--inactive`,
-              `habit-row__action-button--${position}`
-            )}
-            onClick={e => {
-              e.stopPropagation();
-              action();
-              onDeactivate(); // Опционально: закрыть после действия
-            }}
-            aria-label={label}
-          >
-            <Icon />
-          </button>
-        ))}
-      </div>
+      <HabitRowControls
+        state={controlsState()}
+        onAddAbove={onAddAbove}
+        onAddBelow={onAddBelow}
+        onDelete={onDelete}
+        onDeactivate={onDeactivate}
+      />
     </article>
   );
 }

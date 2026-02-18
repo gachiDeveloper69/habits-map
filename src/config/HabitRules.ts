@@ -3,4 +3,5 @@ export const HABIT_RULES = {
     min: 1,
     max: 48,
   },
+  listLimit: 99,
 };

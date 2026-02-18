@@ -10,6 +10,7 @@ interface HabitListProps {
 
 export function HabitList({ habits, onHabitDelete, onAddSideBy }: HabitListProps) {
   const [activeHabitId, setActiveHabitId] = useState<string | null>(null);
+  const [editingHabitId, setEditingHabitId] = useState<string | null>(null);
   const rowRef = useRef<HTMLElement>(null);
 
   const handleActivate = (id: string) => {
