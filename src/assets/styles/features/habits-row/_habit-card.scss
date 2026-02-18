@@ -3,6 +3,8 @@
   --actions-offset-inline: -5%;
   --actions-offset-block: -28px;
 
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; //чтобы не было синего блика.
   display: flex;
   align-items: center;
   justify-content: space-around;

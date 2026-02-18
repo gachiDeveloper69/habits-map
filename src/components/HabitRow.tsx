@@ -13,8 +13,9 @@ interface HabitRowProps {
   onActivate: () => void;
   onDeactivate: () => void;
   onEdit?: () => void;
-  onDelete: (id: string) => void;
-  onAddSideBy: (index: number) => void;
+  onDelete: () => void;
+  onAddAbove: () => void;
+  onAddBelow: () => void;
 }
 
 export function HabitRow({
@@ -24,12 +25,16 @@ export function HabitRow({
   onActivate,
   onDeactivate,
   onDelete,
-  onAddSideBy,
+  onAddAbove,
+  onAddBelow,
 }: HabitRowProps) {
-  const [touchStart, setTouchStart] = useState({ x: 0, y: 0, time: 0 });
-  const [isTouchMove, setIsTouchMove] = useState(false);
-  const [isMouseDown, setIsMouseDown] = useState(false);
   const rowRef = useRef<HTMLElement>(null);
+  const pointerData = useRef({
+    startX: 0,
+    startY: 0,
+    moved: false,
+    pointerId: null as number | null,
+  });
 
   const actionButtons = [
     {
@@ -43,141 +48,74 @@ export function HabitRow({
       id: 'delete',
       icon: Delete,
       position: 'left',
-      action: () => onDelete(habit.id),
+      action: onDelete,
       label: 'Удалить',
     },
     {
       id: 'addAbove',
       icon: Plus,
       position: 'top',
-      action: () => onAddSideBy(habit.order + 1),
+      action: onAddAbove,
       label: 'Добавить сверху',
     },
     {
       id: 'addBelow',
       icon: Plus,
       position: 'bottom',
-      action: () => onAddSideBy(habit.order - 1 >= 0 ? habit.order - 1 : 0),
+      action: onAddBelow,
       label: 'Добавить снизу',
     },
   ];
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    // Не реагируем на клики по интерактивным элементам
-    const target = e.target as HTMLElement;
-    const isActionButton = target.closest('.habit-row__action-button');
-    const isDrag = target.closest('.habit-row__drag');
-    const isToggle = target.closest('.habit-row__toggle');
+  const handlePointerDown = (e: React.PointerEvent) => {
+    pointerData.current.startX = e.clientX;
+    pointerData.current.startY = e.clientY;
+    pointerData.current.moved = false;
+    pointerData.current.pointerId = e.pointerId;
+  };
 
-    if (!isActionButton && !isDrag && !isToggle) {
-      setIsMouseDown(true);
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (e.pointerId !== pointerData.current.pointerId) return;
+    const threshold = 10;
+    const trackX = Math.abs(pointerData.current.startX - e.clientX);
+    const trackY = Math.abs(pointerData.current.startY - e.clientY);
+    if (trackX > threshold || trackY > threshold) {
+      pointerData.current.moved = true;
     }
   };
 
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (isMouseDown) {
-      // Проверяем что это был именно клик, а не выделение текста
-      const target = e.target as HTMLElement;
-      const isActionButton = target.closest('.habit-row__action-button');
-      const isDrag = target.closest('.habit-row__drag');
-      const isToggle = target.closest('.habit-row__toggle');
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (e.pointerId !== pointerData.current.pointerId) return;
 
-      if (!isActionButton && !isDrag && !isToggle) {
-        handleCardToggle();
-      }
+    if (!pointerData.current.moved) {
+      isActive ? onDeactivate() : onActivate();
     }
-    setIsMouseDown(false);
+    pointerData.current.pointerId = null;
   };
 
-  const handleMouseMove = () => {
-    // Если мышь двигается - это не клик
-    if (isMouseDown) {
-      setIsMouseDown(false);
-    }
-  };
-
-  //защита от тапов при скролле
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    setTouchStart({
-      x: touch.clientX,
-      y: touch.clientY,
-      time: Date.now(),
-    });
-    setIsTouchMove(false);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    const diffX = Math.abs(touch.clientX - touchStart.x);
-    const diffY = Math.abs(touch.clientY - touchStart.y);
-
-    // Если движение больше 10px в любую сторону - это скролл/свайп
-    if (diffX > 10 || diffY > 10) {
-      setIsTouchMove(true);
-    }
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchDuration = Date.now() - touchStart.time;
-
-    if (!isTouchMove && touchDuration < 300) {
-      handleCardToggle();
-    }
-  };
-
-  const handleCardToggle = () => {
-    if (isActive) {
-      onDeactivate();
-    } else {
-      onActivate();
-    }
-  };
-
-  const handleDragClick = (e: React.MouseEvent) => {
+  const handleDragClick = (e: React.PointerEvent) => {
     e.stopPropagation();
     // console.log('Начать перетаскивание');
   };
 
-  const handleToggleClick = (e: React.MouseEvent) => {
+  const handleToggleClick = (e: React.PointerEvent) => {
     e.stopPropagation();
     // console.log('Переключить статус');
   };
-
-  //закрытие по клику снаружи
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (rowRef.current && !rowRef.current.contains(event.target as Node)) {
-        onDeactivate();
-      }
-    };
-
-    if (isActive) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isActive, onDeactivate]);
 
   return (
     <article
       ref={rowRef}
       className={clsx('habit-row', `row-${habit.rating}`, { 'habit-row--active': isActive })}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setIsMouseDown(false)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
     >
-      <div className="habit-row__drag" onClick={handleDragClick}>
+      <div className="habit-row__drag" onPointerDown={handleDragClick}>
         <DragHandle />
       </div>
       <div className="habit-row__title">{habit.title}</div>
-      <div onClick={handleToggleClick} className="habit-row__toggle">
+      <div onPointerDown={handleToggleClick} className="habit-row__toggle">
         <MockToggle />
       </div>
 
