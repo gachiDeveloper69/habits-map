@@ -10,6 +10,9 @@
   --text-secondary: rgba(241, 241, 241, 0.68);
   --border-subtle: rgba(255, 255, 255, 0.08);
 
+  --selection-bg: rgba(196, 122, 109, 0.22); /* blush tint */
+  --selection-text: var(--text-primary);
+
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.4);
 
   /* PRIMARY BUTTON */
@@ -82,4 +85,17 @@
   --ctrl-ring-neutral: rgba(143, 163, 184, 0.28);
   --ctrl-ring-danger: rgba(196, 122, 109, 0.32);
   --ctrl-ring-positive: rgba(143, 191, 155, 0.3);
+
+  /* INPUT (edit mode) */
+  --input-bg: rgba(26, 26, 26, 0.64);
+  --input-border: rgba(255, 255, 255, 0.14);
+  --input-border-hover: rgba(255, 255, 255, 0.2);
+
+  --input-text: var(--text-primary);
+  --input-placeholder: rgba(241, 241, 241, 0.44);
+
+  --input-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --input-shadow-focus: 0 0 0 4px rgba(143, 163, 184, 0.24);
+
+  --caret: rgba(196, 122, 109, 0.9);
 }

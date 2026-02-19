@@ -5,24 +5,25 @@ import { useHabits } from '@/hooks/useHabits';
 import { EmptyState } from '@/components/EmptyState';
 import { HabitList } from '@/components/HabitList';
 import { generateNewHabitName } from '@/utils/habitUtils';
+import type { HabitItem } from '@/types/habits';
 
 function App() {
   const { theme, switchTheme } = useTheme();
-  const { habits, createHabit, deleteHabit } = useHabits();
+  const { habits, createHabit, deleteHabit, updateHabit } = useHabits();
 
-  const handleCreateHabit = () => {
+  const handleCreateHabit = (): string | undefined => {
     const title = generateNewHabitName(habits);
     try {
-      createHabit({ title });
+      return createHabit({ title });
     } catch (e) {
       throw new Error(`Failed to add new habit: ${e}`);
     }
   };
 
-  const handleCreateHabitWithIndex = (index: number) => {
+  const handleCreateHabitWithIndex = (index: number): string | undefined => {
     const title = generateNewHabitName(habits);
     try {
-      createHabit({ title }, index);
+      return createHabit({ title }, index);
     } catch (e) {
       throw new Error(`Failed to add new habit: ${e}`);
     }
@@ -35,6 +36,10 @@ function App() {
       throw new Error(`Failed to delete habit by id: ${id} with error: ${e}`);
     }
   };
+
+  const handleEditHabit = (id: string, updates: Partial<Pick<HabitItem, 'rating' | 'title'>>) => {
+    updateHabit(id, updates);
+  };
   return (
     <>
       <section className="page">
@@ -46,6 +51,7 @@ function App() {
               habits={habits}
               onAddSideBy={handleCreateHabitWithIndex}
               onHabitDelete={handleDeleteHabit}
+              onHabitEdit={handleEditHabit}
             />
           ) : (
             <EmptyState onHabitCreate={handleCreateHabit} />

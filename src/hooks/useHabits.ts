@@ -8,7 +8,10 @@ import { normalizeHabits, addToHabitsArray } from '@/utils/habitUtils';
 export function useHabits() {
   const [habits, setHabits] = useLocalStorage<HabitItem[]>(HABIT_CONSTANTS.storageKey, []);
 
-  const createHabit = ({ title, rating = 'neutral' }: CreateHabitData, index?: number) => {
+  const createHabit = (
+    { title, rating = 'neutral' }: CreateHabitData,
+    index?: number
+  ): string | undefined => {
     const normalizedTitle = title.trim().toLowerCase();
     if (normalizedTitle.trim() === '') {
       throw new Error('Название не может быть пустым');
@@ -27,6 +30,7 @@ export function useHabits() {
         updatedAt: Date.now(),
       };
       setHabits(prevHabits => addToHabitsArray(prevHabits, newHabit, index));
+      return newHabit.id;
     } catch (error) {
       console.log(`Error adding habit "${title}":`, error);
       throw error;

@@ -1,0 +1,177 @@
+@use '../../base/core' as *;
+.habit-row__actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; // Чтобы не мешали кликам по карточке
+}
+
+.habit-row__action-button {
+  --actions-offset-inline: -5%;
+  --actions-offset-block: -28px;
+
+  position: absolute;
+  pointer-events: auto;
+  background: var(--ctrl-bg);
+  border: 1px solid var(--ctrl-border);
+  box-shadow: var(--ctrl-shadow);
+  color: var(--ctrl-icon-neutral);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  // ВАЖНО: базовая анимация на трансформацию и прозрачность
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.2s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    opacity 0.2s ease,
+    filter 0.2s ease;
+
+  // ACTIVE/INACTIVE - ьтолько видимость
+  &--inactive {
+    opacity: 0;
+    pointer-events: none;
+    // visibility: hidden; // можно, чтобы не ловить фокус
+  }
+
+  &--active {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    &:disabled {
+      opacity: 0.55 !important;
+      cursor: not-allowed !important;
+    }
+  }
+
+  // POSITIONS (задают ФИНАЛЬНОЕ положение)
+  &--left {
+    left: var(--actions-offset-inline);
+    top: 50%;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+
+  &--right {
+    right: var(--actions-offset-inline);
+    top: 50%;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+
+  &--top {
+    top: var(--actions-offset-block);
+    left: 50%;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  &--bottom {
+    bottom: var(--actions-offset-block);
+    left: 50%;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  // INACTIVE трансформы (откуда вылетают)
+  &--inactive.habit-row__action-button--left {
+    transform: translateY(-50%) translateX(18px) scale(0.85);
+  }
+  &--inactive.habit-row__action-button--right {
+    transform: translateY(-50%) translateX(-18px) scale(0.85);
+  }
+  &--inactive.habit-row__action-button--top {
+    transform: translateX(-50%) translateY(18px) scale(0.85);
+  }
+  &--inactive.habit-row__action-button--bottom {
+    transform: translateX(-50%) translateY(-18px) scale(0.85);
+  }
+
+  // hover/active теперь будет работать стабильно
+  // @include hover {
+  //   transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08);
+  // }
+}
+
+//hover
+.habit-row__action-button--active.habit-row__action-button--left {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
+  }
+}
+.habit-row__action-button--active.habit-row__action-button--right {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateY(-50%) translateX(0) scale(1.08);
+  }
+}
+.habit-row__action-button--active.habit-row__action-button--top {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
+  }
+}
+.habit-row__action-button--active.habit-row__action-button--bottom {
+  @include hover {
+    background: var(--ctrl-bg-hover);
+    transform: translateX(-50%) translateY(0) scale(1.08);
+  }
+}
+
+//status indicator
+
+.habit-row__action-button--delete,
+.habit-row__action-button--cancel {
+  color: var(--ctrl-icon-danger);
+  & svg {
+    fill: currentColor;
+  }
+  @include hover {
+    color: var(--ctrl-icon-danger-hover);
+    box-shadow:
+      var(--ctrl-shadow-hover),
+      0 0 0 1px var(--ctrl-ring-danger);
+  }
+}
+.habit-row__action-button--addAbove,
+.habit-row__action-button--addBelow {
+  color: var(--ctrl-icon-positive);
+  & svg {
+    fill: currentColor;
+  }
+  @include hover {
+    color: var(--ctrl-icon-positive-hover);
+    box-shadow:
+      var(--ctrl-shadow-hover),
+      0 0 0 1px var(--ctrl-ring-positive);
+  }
+}
+.habit-row__action-button--edit {
+  color: var(--ctrl-icon-neutral);
+  & svg {
+    fill: currentColor;
+  }
+  @include hover {
+    color: var(--ctrl-icon-neutral-hover);
+    background: var(--ctrl-bg-hover);
+    border-color: var(--ctrl-border-hover);
+    box-shadow:
+      var(--ctrl-shadow-hover),
+      0 0 0 1px var(--ctrl-ring-neutral);
+  }
+}
+
+/* Адаптив для тач-устройств */
+@media (hover: none) {
+  .habit-row__action-button {
+    width: 44px; /* Больше область для тапа */
+    height: 44px;
+  }
+}

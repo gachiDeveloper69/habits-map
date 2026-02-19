@@ -61,12 +61,16 @@ $mobile-s: 480px;
 @mixin hover {
   @media (hover: hover) {
     &:hover {
-      @content;
+      &:not(:disabled) {
+        @content;
+      }
     }
   }
   @media (hover: none) {
     &:active {
-      @content;
+      &:not(:disabled) {
+        @content;
+      }
     }
   }
 }

@@ -7,7 +7,12 @@
 
   --font: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  --gap-vertical: 14px; // or 16px
-
   --transition-duration: 0.2s;
+
+  /*scales*/
+  --radius-card: 14px;
+  --radius-pill: 999px;
+
+  --row-height: 52px; // mobile-friendly
+  --gap-vertical: 16px;
 }
