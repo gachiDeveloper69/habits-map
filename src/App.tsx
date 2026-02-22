@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ThemeToggle } from './components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
 import { useHabits } from '@/hooks/useHabits';
@@ -6,7 +5,6 @@ import { EmptyState } from '@/components/EmptyState';
 import { HabitList } from '@/components/HabitList';
 import { generateNewHabitName } from '@/utils/habitUtils';
 import type { HabitItem } from '@/types/habits';
-import Trash from '@/icons/delete.svg?react';
 import { DeleteAll } from '@/components/DeleteAll';
 
 function App() {

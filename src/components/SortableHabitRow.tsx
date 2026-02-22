@@ -18,7 +18,7 @@ export function SortableHabitRow({
   onCommitEdit,
   onUpdateRating,
 }: Omit<HabitRowProps, 'dragHandleProps'>) {
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
+  const { setNodeRef, attributes, listeners, transform, isDragging } = useSortable({
     id: habit.id,
   });
 

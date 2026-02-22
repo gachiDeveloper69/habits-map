@@ -1,6 +1,5 @@
 import autoAnimate from '@formkit/auto-animate';
 import type { HabitItem } from '@/types/habits';
-import { HabitRow } from '@/components/HabitRow';
 import { SortableHabitRow } from '@/components/SortableHabitRow';
 import { useState, useRef, useEffect } from 'react';
 
@@ -12,11 +11,9 @@ import {
   useSensor,
   useSensors,
   type DragEndEvent,
-  type DragStartEvent,
 } from '@dnd-kit/core';
 import {
   SortableContext,
-  arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
@@ -118,7 +115,7 @@ export function HabitList({
     })
   );
 
-  function onDragStart(event: DragStartEvent) {
+  function onDragStart() {
     handleStopEdit();
   }
 

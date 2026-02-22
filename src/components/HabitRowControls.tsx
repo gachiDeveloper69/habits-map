@@ -4,7 +4,7 @@ import Edit from '@/icons/edit.svg?react';
 import Delete from '@/icons/delete.svg?react';
 import Apply from '@/icons/check.svg?react';
 import Cancel from '@/icons/cancel.svg?react';
-import React, { memo } from 'react';
+import React from 'react';
 
 export type HabitRowControlsState = 'inactive' | 'active' | 'edit';
 

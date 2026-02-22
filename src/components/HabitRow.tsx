@@ -8,7 +8,7 @@ import { HabitRowControls } from '@/components/HabitRowControls';
 import { RatingToggle } from '@/components/RatingToggle';
 
 import { useEffect, useRef, useState } from 'react';
-import React, { memo } from 'react';
+import React from 'react';
 
 export interface HabitRowProps {
   habit: HabitItem;
@@ -145,7 +145,7 @@ export const HabitRow = React.memo(function HabitRow({
       pointerData.current.longPressFired = false;
     }
   };
-
+  /*
   const handleDragClick = (e: React.PointerEvent) => {
     e.stopPropagation();
     // console.log('Начать перетаскивание');
@@ -155,7 +155,7 @@ export const HabitRow = React.memo(function HabitRow({
     e.stopPropagation();
     // console.log('Переключить статус');
   };
-
+*/
   const controlsState = (): HabitRowControlsState => {
     if (isEditing) return 'edit';
     else if (isActive) return 'active';

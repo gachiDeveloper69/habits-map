@@ -15,7 +15,7 @@
  * - Обрабатывает ошибки парсинга
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 //Дженерик-функция для работы с любым типом данных
 export function useLocalStorage<T>(key: string, initialValue: T) {
