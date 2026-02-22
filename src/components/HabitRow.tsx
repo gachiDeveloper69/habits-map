@@ -1,11 +1,11 @@
-import type { HabitItem } from '@/types/habits';
+import type { HabitItem, HabitRating } from '@/types/habits';
 import clsx from 'clsx';
 import DragHandle from '@/icons/drag-handle.svg?react';
-import MockToggle from '@/icons/mock-toggle.svg?react';
 import type { HabitRowControlsState } from '@/components/HabitRowControls';
 import { HABIT_RULES } from '@/config/HabitRules';
 
 import { HabitRowControls } from '@/components/HabitRowControls';
+import { RatingToggle } from '@/components/RatingToggle';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -22,6 +22,7 @@ interface HabitRowProps {
   onStartEdit: () => void;
   onCancelEdit: () => void;
   onCommitEdit: (newTitle: string) => void;
+  onUpdateRating: (rating: HabitRating) => void;
 }
 
 export function HabitRow({
@@ -36,6 +37,7 @@ export function HabitRow({
   onStartEdit,
   onCancelEdit,
   onCommitEdit,
+  onUpdateRating,
 }: HabitRowProps) {
   const rowRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLInputElement | null>(null);
@@ -204,9 +206,17 @@ export function HabitRow({
         </div>
       )}
 
-      <div onPointerDown={handleToggleClick} className="habit-row__toggle">
+      {/* TOGGLE */}
+      <RatingToggle
+        expanded={isActive && !isEditing}
+        rating={habit.rating}
+        groupId={habit.id}
+        onChange={onUpdateRating}
+      />
+
+      {/* <div onPointerDown={handleToggleClick} className="habit-row__toggle">
         <MockToggle />
-      </div>
+      </div> */}
 
       {/* CONTROLS */}
       <HabitRowControls

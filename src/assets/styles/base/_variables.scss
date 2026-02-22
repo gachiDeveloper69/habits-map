@@ -15,4 +15,13 @@
 
   --row-height: 52px; // mobile-friendly
   --gap-vertical: 16px;
+
+  /* RATING TOGGLE */
+  --rt-collapsed: 36px;
+  --rt-expanded: 112px; // Adjusted for clean calculations (3*32px knob + 16px padding)
+  --rt-padding: 8px;
+  --rt-knob-size: 32px;
+
+  --rt-padding: 8px;
+  --rt-knob-size: 32px;
 }

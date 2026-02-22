@@ -98,4 +98,21 @@
   --input-shadow-focus: 0 0 0 4px rgba(143, 163, 184, 0.24);
 
   --caret: rgba(196, 122, 109, 0.9);
+
+  /* RATING TOGGLE */
+  --rt-collapsed: 36px;
+  --rt-expanded: 152px;
+
+  --rt-bg: rgba(26, 26, 26, 0.86);
+  --rt-border: rgba(255, 255, 255, 0.16);
+  --rt-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+
+  --rt-track-bg: rgba(143, 163, 184, 0.12);
+  --rt-track-border: rgba(255, 255, 255, 0.08);
+
+  --rt-knob-bg: rgba(66, 63, 63, 0.644);
+  --rt-knob-border: rgba(255, 255, 255, 0.14);
+  --rt-knob-shadow: 0 18px 44px rgba(0, 0, 0, 0.72);
+
+  --rt-ring: rgba(143, 163, 184, 0.26);
 }

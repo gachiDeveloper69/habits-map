@@ -1,10 +1,19 @@
 @use '../../base/core' as *;
 
+// .row-minus,
+// .toggle--minus {
+//   background: rgba(196, 122, 109, var(--rating-bg-opacity));
+// }
 .row-minus {
   border-color: rgba(196, 122, 109, var(--rating-border-opacity));
   background: rgba(196, 122, 109, var(--rating-bg-opacity));
   box-shadow: var(--shadow-soft), var(--glow-minus);
 }
+
+// .row-neutral,
+// .toggle--neutral {
+//   background: rgba(143, 163, 184, var(--rating-bg-opacity));
+// }
 
 .row-neutral {
   border-color: rgba(143, 163, 184, var(--rating-border-opacity));

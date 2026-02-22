@@ -1,0 +1,173 @@
+@use '../../base/core' as *;
+
+.habit-row__toggle {
+  position: relative;
+  height: 36px;
+  width: var(--rt-collapsed);
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+  background: transparent;
+
+  transition: width 260ms ease-in-out;
+  will-change: width;
+
+  &--expanded {
+    width: var(--rt-expanded);
+  }
+}
+
+/* Свернутая иконка */
+.toggle__icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+
+  color: var(--text-secondary);
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  transition:
+    opacity 180ms ease,
+    transform 260ms ease;
+
+  & svg {
+    width: 22px;
+    height: 22px;
+    // fill: currentColor;
+    // stroke: currentColor;
+  }
+
+  /* сам цвет иконки по рейтингу */
+  .row-minus & {
+    color: var(--rating-minus);
+  }
+  .row-neutral & {
+    color: var(--rating-neutral);
+  }
+  .row-plus & {
+    color: var(--rating-plus);
+  }
+}
+
+.toggle__icon--hidden {
+  opacity: 0;
+  transform: translateX(-10px) scale(0.92);
+  pointer-events: none;
+}
+
+/* Раскрытый toggle */
+.toggle {
+  position: absolute;
+  inset: 0;
+  @include abs-center;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 10px;
+  height: fit-content;
+
+  border-radius: 20px;
+  background: var(--rt-bg);
+  border: 1px solid var(--rt-border);
+  box-shadow: var(--rt-shadow);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 180ms ease,
+    transform 260ms ease;
+}
+
+.toggle--expanded {
+  opacity: 1;
+  transform: translateX(-30%);
+  pointer-events: auto;
+}
+
+/* опции */
+.toggle__option {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+}
+
+.toggle__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* круг-кнопка внутри */
+.toggle__pill {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  // background: var(--rt-track-bg);
+
+  transition:
+    transform 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease,
+    box-shadow 220ms ease;
+}
+
+/* иконки */
+.toggle__pill svg {
+  width: 18px;
+  height: 18px;
+  // fill: currentColor;
+  // stroke: currentColor;
+}
+
+/* цвета по смыслу */
+.toggle__option--minus {
+  color: var(--rating-minus);
+}
+.toggle__option--neutral {
+  color: var(--rating-neutral);
+}
+.toggle__option--plus {
+  color: var(--rating-plus);
+}
+
+/* выбранное состояние */
+.toggle__input:checked + .toggle__pill {
+  border: 1px solid var(--rt-track-border);
+  background: var(--rt-knob-bg);
+  border-color: var(--rt-knob-border);
+  box-shadow: var(--rt-knob-shadow);
+  transform: scale(1.06);
+  // box-shadow:
+  //   var(--rt-knob-shadow),
+  //   0 0 0 1px currentColor;
+}
+
+/* hover / active */
+.toggle__option .toggle__input:focus-visible + .toggle__pill {
+  box-shadow:
+    var(--rt-knob-shadow),
+    0 0 0 4px var(--rt-ring);
+}
+
+@media (hover: hover) {
+  .toggle__input:hover + .toggle__pill {
+    transform: scale(1.06);
+  }
+}
+@media (hover: none) {
+  .toggle__input:active + .toggle__pill {
+    transform: scale(1.06);
+  }
+}
