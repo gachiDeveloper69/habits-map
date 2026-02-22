@@ -4,6 +4,7 @@ import Neutral from '@/icons/neutral.svg?react';
 import Negative from '@/icons/sad.svg?react';
 import type { HabitRating } from '@/types/habits';
 import { useCallback } from 'react';
+import React, { memo } from 'react';
 
 interface RatingToggleProps {
   expanded: boolean;
@@ -18,7 +19,12 @@ const ICON_BY_RATING = {
   minus: Negative,
 } as const satisfies Record<HabitRating, React.FC<React.SVGProps<SVGSVGElement>>>;
 
-export function RatingToggle({ expanded, rating, groupId, onChange }: RatingToggleProps) {
+export const RatingToggle = React.memo(function RatingToggle({
+  expanded,
+  rating,
+  groupId,
+  onChange,
+}: RatingToggleProps) {
   const RatingIcon = ICON_BY_RATING[rating];
 
   const handleChange = useCallback(
@@ -93,4 +99,4 @@ export function RatingToggle({ expanded, rating, groupId, onChange }: RatingTogg
       </div>
     </div>
   );
-}
+});

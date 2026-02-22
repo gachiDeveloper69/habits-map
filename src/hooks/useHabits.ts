@@ -105,11 +105,16 @@ export function useHabits() {
     setHabits(prevHabits => normalizeHabits(prevHabits.filter(habit => habit.id !== id)));
   };
 
+  const cleanAllHabits = () => {
+    setHabits([]);
+  };
+
   return {
     habits,
     createHabit,
     updateHabit,
     moveHabit,
     deleteHabit,
+    cleanAllHabits,
   };
 }

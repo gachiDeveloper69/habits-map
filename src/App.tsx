@@ -6,10 +6,12 @@ import { EmptyState } from '@/components/EmptyState';
 import { HabitList } from '@/components/HabitList';
 import { generateNewHabitName } from '@/utils/habitUtils';
 import type { HabitItem } from '@/types/habits';
+import Trash from '@/icons/delete.svg?react';
+import { DeleteAll } from '@/components/DeleteAll';
 
 function App() {
   const { theme, switchTheme } = useTheme();
-  const { habits, createHabit, deleteHabit, updateHabit } = useHabits();
+  const { habits, createHabit, deleteHabit, updateHabit, cleanAllHabits, moveHabit } = useHabits();
 
   const handleCreateHabit = (): string | undefined => {
     const title = generateNewHabitName(habits);
@@ -52,11 +54,13 @@ function App() {
               onAddSideBy={handleCreateHabitWithIndex}
               onHabitDelete={handleDeleteHabit}
               onHabitEdit={handleEditHabit}
+              onHabitMove={moveHabit}
             />
           ) : (
             <EmptyState onHabitCreate={handleCreateHabit} />
           )}
         </div>
+        <DeleteAll onDeleteAll={cleanAllHabits} />
       </section>
     </>
   );

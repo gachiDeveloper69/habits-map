@@ -58,20 +58,35 @@
 }
 
 @mixin custom-scrollbar {
+  /* Firefox only */
+  // @supports (scrollbar-width: thin) {
+  //   scrollbar-width: thin;
+  //   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  // }
+
   &::-webkit-scrollbar {
-    width: 4px;
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
 
     &-track {
-      background: var(--color-scrollbar-track);
+      background: var(--scrollbar-track);
+      border-radius: 999px;
     }
 
     &-thumb {
-      background: var(--color-scrollbar-thumb); // цвет полосы
-      border-radius: 8px;
-      transition: background 0.3s ease;
+      background: var(--scrollbar-thumb); // цвет полосы
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+      transition: background 0.18s ease;
 
       @include hover {
-        background: var(--color-scrollbar-thumb-hover);
+        background: var(--scrollbar-thumb-hover);
+      }
+
+      &:active {
+        background: var(--scrollbar-thumb-active);
+        background-clip: content-box;
       }
     }
   }

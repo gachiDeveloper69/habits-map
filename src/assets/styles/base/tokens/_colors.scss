@@ -9,6 +9,12 @@
   --selection-bg: rgba(196, 122, 109, 0.22); /* blush tint */
   --selection-text: var(--text-primary);
 
+  /*SCROLLBAR*/
+  --scrollbar-track: rgba(0, 0, 0, 0.06);
+  --scrollbar-thumb: rgba(38, 38, 38, 0.18);
+  --scrollbar-thumb-hover: rgba(38, 38, 38, 0.28);
+  --scrollbar-thumb-active: rgba(38, 38, 38, 0.34);
+
   /*Rating palette*/
   --rating-minus: #c47a6d; // dusty terracotta
   --rating-neutral: #7f98b3; // gray-blue
@@ -127,4 +133,15 @@
   --rt-knob-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 
   --rt-ring: rgba(143, 163, 184, 0.22);
+
+  /* DELETE ALL FAB */
+  --danger-icon: rgba(196, 122, 109, 0.88);
+  --danger-icon-hover: rgba(196, 122, 109, 1);
+
+  --danger-bg: rgba(250, 232, 229, 0.55); /* blush wash */
+  --danger-bg-hover: rgba(250, 232, 229, 0.78);
+  --danger-border: rgba(196, 122, 109, 0.22);
+  --danger-border-hover: rgba(196, 122, 109, 0.3);
+
+  --danger-ring: rgba(196, 122, 109, 0.24);
 }

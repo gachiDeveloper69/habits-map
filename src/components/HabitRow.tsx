@@ -8,8 +8,9 @@ import { HabitRowControls } from '@/components/HabitRowControls';
 import { RatingToggle } from '@/components/RatingToggle';
 
 import { useEffect, useRef, useState } from 'react';
+import React, { memo } from 'react';
 
-interface HabitRowProps {
+export interface HabitRowProps {
   habit: HabitItem;
   isActive: boolean;
   isEditing: boolean;
@@ -23,9 +24,10 @@ interface HabitRowProps {
   onCancelEdit: () => void;
   onCommitEdit: (newTitle: string) => void;
   onUpdateRating: (rating: HabitRating) => void;
+  dragHandleProps?: React.HTMLAttributes<HTMLElement>;
 }
 
-export function HabitRow({
+export const HabitRow = React.memo(function HabitRow({
   habit,
   isActive,
   isEditing,
@@ -38,6 +40,7 @@ export function HabitRow({
   onCancelEdit,
   onCommitEdit,
   onUpdateRating,
+  dragHandleProps,
 }: HabitRowProps) {
   const rowRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLInputElement | null>(null);
@@ -188,7 +191,8 @@ export function HabitRow({
       onPointerCancel={handlePointerCancel}
       onDoubleClick={onStartEdit}
     >
-      <div className="habit-row__drag" onPointerDown={handleDragClick}>
+      <div className="habit-row__drag" {...(dragHandleProps ?? {})}>
+        {/* onPointerDown={handleDragClick} */}
         <DragHandle />
       </div>
       {isEditing ? (
@@ -232,4 +236,4 @@ export function HabitRow({
       />
     </article>
   );
-}
+});

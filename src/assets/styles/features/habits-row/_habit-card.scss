@@ -95,9 +95,14 @@
     opacity: 0.4;
     cursor: grab;
     user-select: none;
+    touch-action: none;
 
     @include hover {
       color: var(--drag-color-hover);
+    }
+
+    &:active {
+      cursor: grabbing;
     }
 
     & svg {
@@ -109,4 +114,36 @@
     aspect-ratio: 1;
     width: auto;
   }
+}
+
+//DnD
+
+// DnD wrapper around HabitRow
+.row-wrapper {
+  width: 100%;
+
+  // чтобы тень/скейл не обрезались
+  position: relative;
+  will-change: transform;
+
+  // чтобы было более “воздушно” при перестановке
+  transition: filter 180ms ease;
+}
+
+.row-wrapper--dragging {
+  z-index: 30; // выше соседей и активных эффектов
+  cursor: grabbing;
+
+  // “поднятие”
+  transform: translateZ(0) scale(1.03) rotate(-0.6deg);
+
+  // более “дорогая” тень
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.18));
+
+  // лёгкая прозрачность можно убрать — лучше оставить 1
+  opacity: 1;
+}
+
+.habit-list:has(.row-wrapper--dragging) .row-wrapper:not(.row-wrapper--dragging) {
+  filter: saturate(0.95) brightness(0.98);
 }

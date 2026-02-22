@@ -4,6 +4,7 @@ import Edit from '@/icons/edit.svg?react';
 import Delete from '@/icons/delete.svg?react';
 import Apply from '@/icons/check.svg?react';
 import Cancel from '@/icons/cancel.svg?react';
+import React, { memo } from 'react';
 
 export type HabitRowControlsState = 'inactive' | 'active' | 'edit';
 
@@ -20,7 +21,7 @@ interface HabitRowControlsProps {
   onCommitEdit: () => void;
 }
 
-export function HabitRowControls({
+export const HabitRowControls = React.memo(function HabitRowControls({
   state,
   applyEnabled,
   onDelete,
@@ -116,4 +117,4 @@ export function HabitRowControls({
       {editButtons.map(btn => renderBtn(btn, editVisible))}
     </div>
   );
-}
+});
