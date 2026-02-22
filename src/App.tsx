@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ThemeToggle } from './components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
 import { useHabits } from '@/hooks/useHabits';
@@ -9,6 +10,19 @@ import { DeleteAll } from '@/components/DeleteAll';
 
 function App() {
   const { theme, switchTheme } = useTheme();
+
+  useEffect(() => {
+    const tg = (window as any).Telegram?.WebApp;
+    if (!tg) return;
+
+    tg.ready();
+    tg.expand();
+
+    // опционально: подстроиться под тему Telegram
+    // tg.colorScheme = "dark" | "light"
+    // маппить на свою тему:
+    if (tg.colorScheme === 'dark' && theme !== 'dark') switchTheme();
+  }, []);
   const { habits, createHabit, deleteHabit, updateHabit, cleanAllHabits, moveHabit } = useHabits();
 
   const handleCreateHabit = (): string | undefined => {
