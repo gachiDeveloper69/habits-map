@@ -49,6 +49,7 @@ export function SortableHabitRow({
         habit={habit}
         isActive={isActive}
         isEditing={isEditing}
+        isDragging={isDragging}
         onActivate={onActivate}
         onDeactivate={onDeactivate}
         onAddAbove={onAddAbove}

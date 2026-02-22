@@ -70,6 +70,8 @@
   --drag-color-hover: rgb(255, 255, 255);
   --drag-bg-hover: rgba(255, 255, 255, 0.06);
 
+  --drag-shadow: 0 0 60px rgba(143, 163, 184, 0.18);
+
   /* ACTION CONTROLS (habit row buttons) */
   --ctrl-bg: rgba(26, 26, 26, 0.86);
   --ctrl-border: rgba(255, 255, 255, 0.16); /* было 0.10 — теперь отделяемся от card */

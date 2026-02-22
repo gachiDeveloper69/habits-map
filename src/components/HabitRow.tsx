@@ -14,6 +14,7 @@ export interface HabitRowProps {
   habit: HabitItem;
   isActive: boolean;
   isEditing: boolean;
+  isDragging?: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
   onEdit?: () => void;
@@ -31,6 +32,7 @@ export const HabitRow = React.memo(function HabitRow({
   habit,
   isActive,
   isEditing,
+  isDragging,
   onActivate,
   onDeactivate,
   onDelete,
@@ -63,8 +65,14 @@ export const HabitRow = React.memo(function HabitRow({
     }
   }, [isEditing]);
 
+  const isFromDragHandle = (e: React.PointerEvent) => {
+    const el = e.target as HTMLElement;
+    return !!el.closest('.habit-row__drag');
+  };
+
   const handlePointerDown = (e: React.PointerEvent) => {
     if (isEditing) return;
+    if (isFromDragHandle(e)) return; //не трогаем pointerData
 
     pointerData.current = {
       startX: e.clientX,
@@ -87,6 +95,7 @@ export const HabitRow = React.memo(function HabitRow({
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (e.pointerId !== pointerData.current.pointerId) return;
+    if (isFromDragHandle(e)) return; // и тут тоже, чтобы не активировало
     const threshold = 10;
     const trackX = Math.abs(pointerData.current.startX - e.clientX);
     const trackY = Math.abs(pointerData.current.startY - e.clientY);
@@ -184,7 +193,12 @@ export const HabitRow = React.memo(function HabitRow({
   return (
     <article
       ref={rowRef}
-      className={clsx('habit-row', `row-${habit.rating}`, { 'habit-row--active': isActive })}
+      className={clsx(
+        'habit-row',
+        `row-${habit.rating}`,
+        { 'habit-row--active': isActive },
+        { 'habit-row--dragging': isDragging }
+      )}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -192,7 +206,7 @@ export const HabitRow = React.memo(function HabitRow({
       onDoubleClick={onStartEdit}
     >
       <div className="habit-row__drag" {...(dragHandleProps ?? {})}>
-        {/* onPointerDown={handleDragClick} */}
+        {/*  */}
         <DragHandle />
       </div>
       {isEditing ? (
