@@ -889,15 +889,13 @@ svg * {
 @media (hover: none) {
   .habit-row__action-button {
     --actions-offset-inline: -26px;
-    width: 44px; /* Больше область для тапа */
-    height: 44px;
+    --actions-offset-block: -36px;
   }
 }
 @media (max-width: 767px) {
   .habit-row__action-button {
     --actions-offset-inline: -26px;
-    width: 44px; /* Больше область для тапа */
-    height: 44px;
+    --actions-offset-block: -34px;
   }
 }
 .habit-row__toggle {
