@@ -5,11 +5,13 @@
   text-align: center;
 
   padding: 28px 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  // background: var(--bg-card);
+  background-color: transparent;
+  // border: 1px solid var(--border-subtle);
+  border: none;
 
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-soft);
+  // box-shadow: var(--shadow-soft);
   display: flex;
   align-items: center;
   justify-content: center;

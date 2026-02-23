@@ -6,7 +6,6 @@
   $translateX: null,
   $translateY: null
 ) {
-  // Если translate не заданы, используем финальную позицию в зависимости от направления
   $finalX: if($translateX != null, $translateX, 0);
   $finalY: if($translateY != null, $translateY, 0);
   animation: slide-from-#{$direction} $duration cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -34,7 +33,6 @@
   $translateX: null,
   $translateY: null
 ) {
-  // Если translate не заданы, используем финальную позицию в зависимости от направления
   $finalX: if($translateX != null, $translateX, 0);
   $finalY: if($translateY != null, $translateY, 0);
 

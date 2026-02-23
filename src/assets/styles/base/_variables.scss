@@ -20,10 +20,21 @@
 
   /* RATING TOGGLE */
   --rt-collapsed: 36px;
-  --rt-expanded: 112px; // Adjusted for clean calculations (3*32px knob + 16px padding)
+  --rt-expanded: 90px; // Adjusted for clean calculations (3*32px knob + 16px padding)
   --rt-padding: 8px;
   --rt-knob-size: 32px;
 
   --rt-padding: 8px;
   --rt-knob-size: 32px;
+
+  /*LIST*/
+  --list-pad-inline: 24px;
+}
+
+@include mobile {
+  :root {
+    --list-pad-inline: 40px; // место под вылет кнопок (мобилка)
+    --rt-expanded: 120px;
+    --gap-vertical: 42px;
+  }
 }

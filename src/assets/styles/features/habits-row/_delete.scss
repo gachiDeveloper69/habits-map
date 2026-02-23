@@ -1,8 +1,9 @@
 @use '../../base/core' as *;
 .delete-all {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
+  // position: fixed; - убрал в хедер
+  // bottom: 16px;
+  // right: 16px;
+  position: static;
   z-index: 50;
 
   width: 42px;
@@ -58,16 +59,22 @@
 }
 
 .delete-all-wrap {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
+  position: relative;
   z-index: 50;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
 }
 
 .delete-confirm {
   position: absolute;
-  right: 0;
-  bottom: 52px;
+  left: 0;
+  top: calc(100% + 10px);
+  right: auto;
+  bottom: auto;
 
   display: flex;
   align-items: center;

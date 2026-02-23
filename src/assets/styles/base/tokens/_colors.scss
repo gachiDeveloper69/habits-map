@@ -31,7 +31,7 @@
   /* surfaces */
   --bg-surface: var(--bg-page);
   --bg-card: #ffffff;
-  --bg-card-elevated: #fffdfb; // чуть теплее/светлее, чем bg-card
+  --bg-card-elevated: #fffdfb;
 
   /*card*/
   --border-card: rgba(0, 0, 0, 0.08);
@@ -119,7 +119,7 @@
   --input-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
   --input-shadow-focus: 0 0 0 4px rgba(143, 163, 184, 0.22); /* neutral calm ring */
 
-  --caret: rgba(196, 122, 109, 0.85); /* чуть blush, но не вырви-глаз */
+  --caret: rgba(196, 122, 109, 0.85);
 
   /* RATING TOGGLE */
 
@@ -146,4 +146,17 @@
   --danger-border-hover: rgba(196, 122, 109, 0.3);
 
   --danger-ring: rgba(196, 122, 109, 0.24);
+
+  /* GLASS HEADER */
+  --header-height: 64px;
+
+  --header-bg: rgba(248, 246, 243, 0.72); // стекло поверх page
+  --header-border: rgba(0, 0, 0, 0.06);
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  /* лёгкий блик сверху */
+  --header-highlight: rgba(255, 255, 255, 0.55);
+
+  /* чуть теплее */
+  --header-bg-alt: rgba(255, 253, 251, 0.7);
 }

@@ -97,7 +97,6 @@ export const HabitRowControls = React.memo(function HabitRowControls({
         onPointerUp={e => {
           e.stopPropagation();
           btn.action();
-          // В edit-режиме не деактивируем ряд автоматически (кроме apply/cancel — потом решим логикой)
           if (state === 'active' && btn.id !== 'edit') onDeactivate();
         }}
         aria-label={btn.label}

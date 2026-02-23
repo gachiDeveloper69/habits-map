@@ -10,7 +10,7 @@
   --text-secondary: rgba(241, 241, 241, 0.68);
   --border-subtle: rgba(255, 255, 255, 0.08);
 
-  --selection-bg: rgba(196, 122, 109, 0.22); /* blush tint */
+  --selection-bg: rgba(196, 122, 109, 0.22);
   --selection-text: var(--text-primary);
 
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.4);
@@ -74,7 +74,7 @@
 
   /* ACTION CONTROLS (habit row buttons) */
   --ctrl-bg: rgba(26, 26, 26, 0.86);
-  --ctrl-border: rgba(255, 255, 255, 0.16); /* было 0.10 — теперь отделяемся от card */
+  --ctrl-border: rgba(255, 255, 255, 0.16);
   --ctrl-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
 
   --ctrl-bg-hover: rgba(32, 32, 32, 0.92);
@@ -108,8 +108,6 @@
   --caret: rgba(196, 122, 109, 0.9);
 
   /* RATING TOGGLE */
-  --rt-collapsed: 36px;
-  --rt-expanded: 152px;
 
   --rt-bg: rgba(26, 26, 26, 0.86);
   --rt-border: rgba(255, 255, 255, 0.16);
@@ -134,4 +132,18 @@
   --danger-border-hover: rgba(196, 122, 109, 0.34);
 
   --danger-ring: rgba(196, 122, 109, 0.22);
+
+  /* GLASS HEADER */
+
+  --header-height: 64px;
+
+  --header-bg: rgba(248, 246, 243, 0.72); // стекло поверх page
+  --header-border: rgba(0, 0, 0, 0.06);
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  /* лёгкий блик сверху */
+  --header-highlight: rgba(255, 255, 255, 0.55);
+
+  /* чуть теплее */
+  --header-bg-alt: rgba(255, 253, 251, 0.7);
 }

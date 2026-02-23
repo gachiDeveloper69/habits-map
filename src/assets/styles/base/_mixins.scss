@@ -58,7 +58,7 @@
 }
 
 @mixin custom-scrollbar {
-  /* Firefox only */
+  /* Firefox only (breaks webkit styles, fuck em)*/
   // @supports (scrollbar-width: thin) {
   //   scrollbar-width: thin;
   //   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);

@@ -13,13 +13,22 @@
   --scrollbar-size: 12px;
   /* RATING TOGGLE */
   --rt-collapsed: 36px;
-  --rt-expanded: 112px;
+  --rt-expanded: 90px;
   --rt-padding: 8px;
   --rt-knob-size: 32px;
   --rt-padding: 8px;
   --rt-knob-size: 32px;
+  /*LIST*/
+  --list-pad-inline: 24px;
 }
 
+@media (max-width: 767px) {
+  :root {
+    --list-pad-inline: 40px;
+    --rt-expanded: 120px;
+    --gap-vertical: 42px;
+  }
+}
 :root {
   color-scheme: light;
 }
@@ -40,7 +49,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Firefox only */
+  /* Firefox only (breaks webkit styles, fuck em)*/
 }
 body::-webkit-scrollbar {
   width: var(--scrollbar-size);
@@ -169,7 +178,7 @@ body::-webkit-scrollbar-thumb:active {
   --input-placeholder: rgba(38, 38, 38, 0.42);
   --input-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
   --input-shadow-focus: 0 0 0 4px rgba(143, 163, 184, 0.22); /* neutral calm ring */
-  --caret: rgba(196, 122, 109, 0.85); /* чуть blush, но не вырви-глаз */
+  --caret: rgba(196, 122, 109, 0.85);
   /* RATING TOGGLE */
   --rt-bg: rgba(163, 163, 163, 0.219);
   --rt-border: rgba(0, 0, 0, 0.1);
@@ -188,6 +197,15 @@ body::-webkit-scrollbar-thumb:active {
   --danger-border: rgba(196, 122, 109, 0.22);
   --danger-border-hover: rgba(196, 122, 109, 0.3);
   --danger-ring: rgba(196, 122, 109, 0.24);
+  /* GLASS HEADER */
+  --header-height: 64px;
+  --header-bg: rgba(248, 246, 243, 0.72);
+  --header-border: rgba(0, 0, 0, 0.06);
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  /* лёгкий блик сверху */
+  --header-highlight: rgba(255, 255, 255, 0.55);
+  /* чуть теплее */
+  --header-bg-alt: rgba(255, 253, 251, 0.7);
 }
 
 :root {
@@ -392,12 +410,13 @@ svg * {
 }
 .page {
   min-height: 100vh;
-  padding: 72px 0 40px;
 }
 
 .container {
+  padding: 72px 0 40px;
   width: min(var(--container-max), 100% - var(--container-pad) * 2);
   margin: 0 auto;
+  /* верхний fade, чтобы под хедером было мягко */
 }
 
 @font-face {
@@ -489,6 +508,29 @@ svg * {
   bottom: -16px;
 }
 
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: none;
+  padding: 0 56px;
+  margin: 0;
+  background: color-mix(in srgb, var(--bg-page) 38%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.page-header .semantic-heading {
+  margin: 0;
+  line-height: 1;
+}
+
 [data-theme=dark] {
   color-scheme: dark;
   /* page, text*/
@@ -497,7 +539,7 @@ svg * {
   --text-primary: #f1f1f1;
   --text-secondary: rgba(241, 241, 241, 0.68);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --selection-bg: rgba(196, 122, 109, 0.22); /* blush tint */
+  --selection-bg: rgba(196, 122, 109, 0.22);
   --selection-text: var(--text-primary);
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.4);
   /*SCROLLBAR*/
@@ -546,7 +588,7 @@ svg * {
   --drag-shadow: 0 0 60px rgba(143, 163, 184, 0.18);
   /* ACTION CONTROLS (habit row buttons) */
   --ctrl-bg: rgba(26, 26, 26, 0.86);
-  --ctrl-border: rgba(255, 255, 255, 0.16); /* было 0.10 — теперь отделяемся от card */
+  --ctrl-border: rgba(255, 255, 255, 0.16);
   --ctrl-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
   --ctrl-bg-hover: rgba(32, 32, 32, 0.92);
   --ctrl-border-hover: rgba(255, 255, 255, 0.22);
@@ -570,8 +612,6 @@ svg * {
   --input-shadow-focus: 0 0 0 4px rgba(143, 163, 184, 0.24);
   --caret: rgba(196, 122, 109, 0.9);
   /* RATING TOGGLE */
-  --rt-collapsed: 36px;
-  --rt-expanded: 152px;
   --rt-bg: rgba(26, 26, 26, 0.86);
   --rt-border: rgba(255, 255, 255, 0.16);
   --rt-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
@@ -589,13 +629,18 @@ svg * {
   --danger-border: rgba(196, 122, 109, 0.26);
   --danger-border-hover: rgba(196, 122, 109, 0.34);
   --danger-ring: rgba(196, 122, 109, 0.22);
+  /* GLASS HEADER */
+  --header-height: 64px;
+  --header-bg: rgba(248, 246, 243, 0.72);
+  --header-border: rgba(0, 0, 0, 0.06);
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  /* лёгкий блик сверху */
+  --header-highlight: rgba(255, 255, 255, 0.55);
+  /* чуть теплее */
+  --header-bg-alt: rgba(255, 253, 251, 0.7);
 }
 
 .theme-toggle {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 50;
   width: 42px;
   height: 42px;
   border-radius: 999px;
@@ -835,6 +880,7 @@ svg * {
 /* Адаптив для тач-устройств */
 @media (hover: none) {
   .habit-row__action-button {
+    --actions-offset-inline: -26px;
     width: 44px; /* Больше область для тапа */
     height: 44px;
   }
@@ -887,30 +933,25 @@ svg * {
 
 /* Раскрытый toggle */
 .toggle {
-  position: absolute;
-  inset: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
+  /* УБИРАЕМ absolute полностью */
+  position: static;
   display: flex;
   gap: 5px;
   align-items: center;
-  width: fit-content;
-  padding: 5px 10px;
-  height: fit-content;
+  padding: 4px;
   border-radius: 20px;
   background: var(--rt-bg);
   border: 1px solid var(--rt-border);
   box-shadow: var(--rt-shadow);
   opacity: 0;
+  transform: translateX(12px) scale(0.98);
   pointer-events: none;
   transition: opacity 180ms ease, transform 260ms ease;
 }
 
 .toggle--expanded {
   opacity: 1;
-  transform: translateX(-30%);
+  transform: translateX(0) scale(1);
   pointer-events: auto;
 }
 
@@ -984,13 +1025,16 @@ svg * {
   .toggle__input:active + .toggle__pill {
     transform: scale(1.06);
   }
+  .toggle--expanded {
+    margin-right: 19px;
+  }
 }
 .habit-row {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 12px;
   height: var(--row-height);
   width: 100%;
@@ -1022,6 +1066,7 @@ svg * {
 }
 .habit-row__title {
   flex: 1;
+  min-width: 0;
   font-size: 16px;
   color: var(--text-primary);
   white-space: nowrap;
@@ -1029,6 +1074,7 @@ svg * {
   text-overflow: ellipsis;
   text-align: center;
   letter-spacing: var(--letter-spacing-tight);
+  transition: opacity 180ms ease;
 }
 .habit-row__title--input {
   width: 100%;
@@ -1065,6 +1111,26 @@ svg * {
   border-color: var(--input-border-hover);
   box-shadow: var(--input-shadow), var(--input-shadow-focus);
 }
+.habit-row__toggle {
+  flex: 0 0 var(--rt-collapsed);
+  flex-shrink: 0;
+  position: relative;
+  height: 36px;
+  width: var(--rt-collapsed);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 999px;
+  background: transparent;
+  transition: width 260ms ease-in-out;
+  will-change: width;
+}
+.habit-row__toggle--expanded {
+  width: var(--rt-expanded);
+}
+.habit-row__toggle--expanded {
+  flex-basis: var(--rt-expanded);
+}
 .habit-row__drag {
   transition: all 0.25s;
   color: var(--drag-color);
@@ -1075,6 +1141,7 @@ svg * {
   cursor: grab;
   user-select: none;
   touch-action: none;
+  flex: 0 0 auto;
 }
 @media (hover: hover) {
   .habit-row__drag:hover:not(:disabled) {
@@ -1091,11 +1158,6 @@ svg * {
 }
 .habit-row__drag svg {
   fill: currentColor;
-}
-.habit-row__toggle {
-  height: 100%;
-  aspect-ratio: 1;
-  width: auto;
 }
 
 .row-wrapper {
@@ -1119,10 +1181,9 @@ svg * {
   margin-top: 10vh;
   text-align: center;
   padding: 28px 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background-color: transparent;
+  border: none;
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-soft);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1188,6 +1249,8 @@ svg * {
   width: min(720px, 100%);
   padding: 0 14px;
   margin: 0 auto;
+  padding-left: calc(var(--list-pad-inline) + env(safe-area-inset-left));
+  padding-right: calc(var(--list-pad-inline) + env(safe-area-inset-right));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1196,9 +1259,7 @@ svg * {
 }
 
 .delete-all {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
+  position: static;
   z-index: 50;
   width: 42px;
   height: 42px;
@@ -1249,16 +1310,20 @@ svg * {
 }
 
 .delete-all-wrap {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
+  position: relative;
   z-index: 50;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
 }
 
 .delete-confirm {
   position: absolute;
-  right: 0;
-  bottom: 52px;
+  left: 0;
+  top: calc(100% + 10px);
+  right: auto;
+  bottom: auto;
   display: flex;
   align-items: center;
   gap: 10px;

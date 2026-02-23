@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-import { ThemeToggle } from './components/ThemeToggle';
+import { Header } from '@/components/Header';
 import { useTheme } from '@/hooks/useTheme';
 import { useHabits } from '@/hooks/useHabits';
 import { EmptyState } from '@/components/EmptyState';
 import { HabitList } from '@/components/HabitList';
 import { generateNewHabitName } from '@/utils/habitUtils';
 import type { HabitItem } from '@/types/habits';
-import { DeleteAll } from '@/components/DeleteAll';
 
 function App() {
   const { theme, switchTheme } = useTheme();
@@ -18,9 +17,8 @@ function App() {
     tg.ready();
     tg.expand();
 
-    // опционально: подстроиться под тему Telegram
+    // подстроиться под тему Telegram (не работает - потом починить)
     // tg.colorScheme = "dark" | "light"
-    // маппить на свою тему:
     if (tg.colorScheme === 'dark' && theme !== 'dark') switchTheme();
   }, []);
   const { habits, createHabit, deleteHabit, updateHabit, cleanAllHabits, moveHabit } = useHabits();
@@ -57,8 +55,7 @@ function App() {
   return (
     <>
       <section className="page">
-        <h1 className="semantic-heading">Карта привычек</h1>
-        <ThemeToggle currentTheme={theme} onThemeToggle={switchTheme} />
+        <Header theme={theme} onDeleteAll={cleanAllHabits} onSwitchTheme={switchTheme} />
         <div className="container">
           {habits.length > 0 ? (
             <HabitList
@@ -72,7 +69,6 @@ function App() {
             <EmptyState onHabitCreate={handleCreateHabit} />
           )}
         </div>
-        <DeleteAll onDeleteAll={cleanAllHabits} />
       </section>
     </>
   );
