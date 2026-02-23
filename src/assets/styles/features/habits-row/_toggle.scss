@@ -173,3 +173,12 @@
     margin-right: 19px;
   }
 }
+
+@include mobile {
+  .toggle__input:active + .toggle__pill {
+    transform: scale(1.06);
+  }
+  .toggle--expanded {
+    margin-right: 19px;
+  }
+}

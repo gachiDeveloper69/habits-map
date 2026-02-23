@@ -86,6 +86,14 @@ body::-webkit-scrollbar-thumb:active {
   color: var(--selection-text);
 }
 
+button,
+[role=button],
+.delete-all,
+.theme-toggle,
+.toggle__input {
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   /* page, text*/
   --bg-page: #f8f6f3;
@@ -885,6 +893,13 @@ svg * {
     height: 44px;
   }
 }
+@media (max-width: 767px) {
+  .habit-row__action-button {
+    --actions-offset-inline: -26px;
+    width: 44px; /* Больше область для тапа */
+    height: 44px;
+  }
+}
 .habit-row__toggle {
   position: relative;
   height: 36px;
@@ -1022,6 +1037,14 @@ svg * {
   }
 }
 @media (hover: none) {
+  .toggle__input:active + .toggle__pill {
+    transform: scale(1.06);
+  }
+  .toggle--expanded {
+    margin-right: 19px;
+  }
+}
+@media (max-width: 767px) {
   .toggle__input:active + .toggle__pill {
     transform: scale(1.06);
   }

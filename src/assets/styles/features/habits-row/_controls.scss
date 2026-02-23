@@ -176,3 +176,11 @@
     height: 44px;
   }
 }
+
+@include mobile {
+  .habit-row__action-button {
+    --actions-offset-inline: -26px;
+    width: 44px; /* Больше область для тапа */
+    height: 44px;
+  }
+}

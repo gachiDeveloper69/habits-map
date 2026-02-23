@@ -34,3 +34,12 @@ body {
   background: var(--selection-bg);
   color: var(--selection-text);
 }
+
+//remove blue shit around buttons on touch
+button,
+[role='button'],
+.delete-all,
+.theme-toggle,
+.toggle__input {
+  -webkit-tap-highlight-color: transparent;
+}
