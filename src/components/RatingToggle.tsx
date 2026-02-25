@@ -3,7 +3,7 @@ import Positive from '@/icons/happy.svg?react';
 import Neutral from '@/icons/neutral.svg?react';
 import Negative from '@/icons/sad.svg?react';
 import type { HabitRating } from '@/types/habits';
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import React from 'react';
 
 interface RatingToggleProps {
