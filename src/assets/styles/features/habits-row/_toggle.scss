@@ -160,6 +160,10 @@
     0 0 0 4px var(--rt-ring);
 }
 
+.toggle[data-locked='true'] {
+  pointer-events: none;
+}
+
 @media (hover: hover) {
   .toggle__input:hover + .toggle__pill {
     transform: scale(1.06);

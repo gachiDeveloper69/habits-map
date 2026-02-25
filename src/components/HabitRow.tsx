@@ -73,6 +73,10 @@ export const HabitRow = React.memo(function HabitRow({
   const handlePointerDown = (e: React.PointerEvent) => {
     if (isEditing) return;
     if (isFromDragHandle(e)) return; //не трогаем pointerData
+    if (isFromInteractive(e)) return;
+
+    //жест только на текущий элемент
+    e.currentTarget.setPointerCapture(e.pointerId);
 
     pointerData.current = {
       startX: e.clientX,
@@ -96,6 +100,8 @@ export const HabitRow = React.memo(function HabitRow({
   const handlePointerMove = (e: React.PointerEvent) => {
     if (e.pointerId !== pointerData.current.pointerId) return;
     if (isFromDragHandle(e)) return; // и тут тоже, чтобы не активировало
+    if (isFromInteractive(e)) return;
+
     const threshold = 10;
     const trackX = Math.abs(pointerData.current.startX - e.clientX);
     const trackY = Math.abs(pointerData.current.startY - e.clientY);
@@ -112,6 +118,11 @@ export const HabitRow = React.memo(function HabitRow({
   const handlePointerUp = (e: React.PointerEvent) => {
     if (isEditing) return;
     if (e.pointerId !== pointerData.current.pointerId) return;
+
+    //отпускаем capture
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {}
 
     if (pointerData.current.longPressFired) {
       if (pointerData.current.timerId) {
@@ -137,6 +148,11 @@ export const HabitRow = React.memo(function HabitRow({
 
   const handlePointerCancel = (e: React.PointerEvent) => {
     if (e.pointerId === pointerData.current.pointerId) {
+      //отпускаем capture
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      } catch {}
+
       if (pointerData.current.timerId) {
         clearTimeout(pointerData.current.timerId);
         pointerData.current.timerId = null;
@@ -144,6 +160,11 @@ export const HabitRow = React.memo(function HabitRow({
       pointerData.current.pointerId = null;
       pointerData.current.longPressFired = false;
     }
+  };
+
+  const isFromInteractive = (e: React.PointerEvent) => {
+    const el = e.target as HTMLElement;
+    return !!el.closest('.habit-row__action-button, .habit-row__toggle, input');
   };
   /*
   const handleDragClick = (e: React.PointerEvent) => {

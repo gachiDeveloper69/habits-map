@@ -94,6 +94,10 @@ export const HabitRowControls = React.memo(function HabitRowControls({
           visible ? 'habit-row__action-button--active' : 'habit-row__action-button--inactive',
           `habit-row__action-button--${btn.position}`
         )}
+        onPointerDown={e => {
+          e.stopPropagation;
+          e.preventDefault;
+        }}
         onPointerUp={e => {
           e.stopPropagation();
           btn.action();

@@ -9,7 +9,7 @@
   --radius-card: 14px;
   --radius-pill: 999px;
   --row-height: 52px;
-  --gap-vertical: 16px;
+  --gap-vertical: 30px;
   --scrollbar-size: 12px;
   /* RATING TOGGLE */
   --rt-collapsed: 36px;
@@ -26,7 +26,7 @@
   :root {
     --list-pad-inline: 40px;
     --rt-expanded: 120px;
-    --gap-vertical: 42px;
+    --gap-vertical: 44px;
   }
 }
 :root {
@@ -1027,6 +1027,10 @@ svg * {
 /* hover / active */
 .toggle__option .toggle__input:focus-visible + .toggle__pill {
   box-shadow: var(--rt-knob-shadow), 0 0 0 4px var(--rt-ring);
+}
+
+.toggle[data-locked=true] {
+  pointer-events: none;
 }
 
 @media (hover: hover) {
