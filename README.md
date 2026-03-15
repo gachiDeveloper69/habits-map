@@ -4,6 +4,13 @@ A minimalistic, mobile-first habit tracking app built with modern React architec
 
 > Focused on interaction design, mobile edge-cases, and clean component architecture.
 
+## Preview
+
+![Initial state light theme](./screenshots/initial-light.png)
+![Initial state dark theme](./screenshots/initial-dark.png)
+![Habits list light theme](./screenshots/tasks-light.png)
+![Habits list light theme](./screenshots/tasks-light.png)
+
 ---
 
 ## ✨ Features
