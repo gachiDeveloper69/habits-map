@@ -27,3 +27,9 @@
   margin: 0;
   line-height: 1;
 }
+
+.toggles {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

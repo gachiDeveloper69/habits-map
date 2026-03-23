@@ -7,6 +7,7 @@ import { HABIT_RULES } from '@/config/HabitRules';
 import { HabitRowControls } from '@/components/HabitRowControls';
 import { RatingToggle } from '@/components/RatingToggle';
 
+import { useLanguage } from '@/i18n/LanguageProvider';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 
@@ -54,6 +55,8 @@ export const HabitRow = React.memo(function HabitRow({
     timerId: null as number | null,
     longPressFired: false,
   });
+
+  const { t } = useLanguage();
 
   const [draft, setDraft] = useState<string>(() => habit.title);
   const isTitleValid = draft.trim().length > 0;
@@ -236,7 +239,7 @@ export const HabitRow = React.memo(function HabitRow({
           ref={titleRef}
           value={draft}
           onChange={e => setDraft(e.target.value)}
-          aria-label="Название привычки"
+          aria-label={t('habitRow.inputArLabel')}
           maxLength={HABIT_RULES.title.max}
         />
       ) : (

@@ -1,4 +1,5 @@
 import type { Theme } from '@/types/theme';
+import { useLanguage } from '@/i18n/LanguageProvider';
 
 import Sun from '@/icons/sun.svg?react';
 import Moon from '@/icons/moon.svg?react';
@@ -15,9 +16,14 @@ type ThemeToggleProps = {
 
 export function ThemeToggle({ currentTheme, onThemeToggle }: ThemeToggleProps) {
   const ThemeIcon = ICON_BY_THEME[currentTheme];
+  const { t } = useLanguage();
 
   return (
-    <button className="theme-toggle" aria-label="Toggle theme" onClick={() => onThemeToggle()}>
+    <button
+      className="theme-toggle"
+      aria-label={t('theme.ariaLabel')}
+      onClick={() => onThemeToggle()}
+    >
       <ThemeIcon className="theme-toggle__icon" />
     </button>
   );

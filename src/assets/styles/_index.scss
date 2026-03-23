@@ -16,6 +16,8 @@
 //features/theme
 @forward './features/theme/dark-theme';
 @forward './features/theme/theme-toggle';
+//features/i18n
+@forward './features/i18n/lang-toggle';
 //features/habits-row
 @forward './features/habits-row/controls';
 @forward './features/habits-row/toggle';

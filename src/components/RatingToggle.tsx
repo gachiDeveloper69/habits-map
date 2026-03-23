@@ -6,6 +6,8 @@ import type { HabitRating } from '@/types/habits';
 import { useCallback, useEffect, useRef } from 'react';
 import React from 'react';
 
+import { useLanguage } from '@/i18n/LanguageProvider';
+
 interface RatingToggleProps {
   expanded: boolean;
   rating: HabitRating;
@@ -28,6 +30,8 @@ export const RatingToggle = React.memo(function RatingToggle({
   onChange,
 }: RatingToggleProps) {
   const RatingIcon = ICON_BY_RATING[rating];
+
+  const { t } = useLanguage();
 
   const lockUntilRef = useRef(0);
   const prevExpandedRef = useRef(expanded);
@@ -61,7 +65,7 @@ export const RatingToggle = React.memo(function RatingToggle({
       {/* раскрытый toggle */}
       <div
         className={clsx('toggle', expanded && 'toggle--expanded', `toggle--${rating}`)}
-        aria-label="Оценка привычки"
+        aria-label={t('rating.ariaLabel')}
         role="radiogroup"
         onPointerDown={e => e.stopPropagation()}
         onPointerUp={e => e.stopPropagation()}

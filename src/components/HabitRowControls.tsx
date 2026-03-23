@@ -6,6 +6,8 @@ import Apply from '@/icons/check.svg?react';
 import Cancel from '@/icons/cancel.svg?react';
 import React from 'react';
 
+import { useLanguage } from '@/i18n/LanguageProvider';
+
 export type HabitRowControlsState = 'inactive' | 'active' | 'edit';
 
 interface HabitRowControlsProps {
@@ -35,34 +37,36 @@ export const HabitRowControls = React.memo(function HabitRowControls({
   const mainVisible = state === 'active';
   const editVisible = state === 'edit';
 
+  const { t } = useLanguage();
+
   const mainButtons = [
     {
       id: 'edit',
       icon: Edit,
       position: 'right',
       action: onStartEdit,
-      label: 'Редактировать',
+      label: t('habitControls.edit'),
     },
     {
       id: 'delete',
       icon: Delete,
       position: 'left',
       action: onDelete,
-      label: 'Удалить',
+      label: t('habitControls.delete'),
     },
     {
       id: 'addAbove',
       icon: Plus,
       position: 'top',
       action: onAddAbove,
-      label: 'Добавить сверху',
+      label: t('habitControls.addAbove'),
     },
     {
       id: 'addBelow',
       icon: Plus,
       position: 'bottom',
       action: onAddBelow,
-      label: 'Добавить снизу',
+      label: t('habitControls.addBelow'),
     },
   ];
   const editButtons = [
@@ -71,7 +75,7 @@ export const HabitRowControls = React.memo(function HabitRowControls({
       icon: Apply,
       position: 'right',
       action: onCommitEdit,
-      label: 'Добавить снизу',
+      label: t('habitControls.apply'),
       disabled: !applyEnabled,
     },
     {
@@ -79,7 +83,7 @@ export const HabitRowControls = React.memo(function HabitRowControls({
       icon: Cancel,
       position: 'left',
       action: onCancelEdit,
-      label: 'Добавить снизу',
+      label: t('habitControls.cancel'),
     },
   ];
 
