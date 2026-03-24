@@ -11,7 +11,7 @@ import { useLanguage } from '@/i18n/LanguageProvider';
 
 export default function HabitsMap() {
   const { theme, switchTheme } = useTheme();
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const baseName = t('newHabitName.default');
 
@@ -21,10 +21,6 @@ export default function HabitsMap() {
 
     tg.ready();
     tg.expand();
-
-    // подстроиться под тему Telegram (не работает - потом починить)
-    // tg.colorScheme = "dark" | "light"
-    if (tg.colorScheme === 'dark' && theme !== 'dark') switchTheme();
   }, []);
   const { habits, createHabit, deleteHabit, updateHabit, cleanAllHabits, moveHabit } = useHabits();
 

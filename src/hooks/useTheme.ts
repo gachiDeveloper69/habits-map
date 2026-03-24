@@ -1,36 +1,31 @@
-import { getSystemTheme, getStoredTheme, applyTheme } from '@/utils/themeUtils';
+import { getSystemTheme, getStoredTheme, applyTheme, getTelegramTheme } from '@/utils/themeUtils';
 import type { Theme } from '@/types/theme';
 import { useEffect, useState, useLayoutEffect } from 'react';
 
+function resolveInitialTheme(): Theme {
+  return getStoredTheme() ?? getTelegramTheme() ?? getSystemTheme();
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(resolveInitialTheme);
 
   useLayoutEffect(() => {
-    const initialTheme = getStoredTheme() ?? getSystemTheme();
-
-    if (initialTheme && initialTheme !== theme) {
-      try {
-        setTheme(initialTheme);
-        applyTheme(initialTheme);
-      } catch (e) {
-        throw new Error(`Не удалось применить тему: ${initialTheme} - ${e}`);
-      }
-    }
+    applyTheme(theme);
   }, []);
 
-  const getNextTheme = (theme: Theme) => (theme === 'dark' ? 'light' : 'dark');
+  const getNextTheme = (currentTheme: Theme): Theme => (currentTheme === 'dark' ? 'light' : 'dark');
+
   const switchTheme = () => {
-    try {
-      setTheme(prev => getNextTheme(prev));
-    } catch (e) {
-      throw new Error(`Не удалось поменять тему: ${e}`);
-    }
+    setTheme(prev => getNextTheme(prev));
   };
 
-  useEffect(() => applyTheme(theme), [theme]);
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
   return {
     theme,
+    setTheme,
     switchTheme,
     getNextTheme,
   };
