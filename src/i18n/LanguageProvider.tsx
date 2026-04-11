@@ -47,6 +47,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
 
   useEffect(() => {
     localStorage.setItem(LANG_CONSTANTS.storageKey, language);
+    document.documentElement.lang = language;
   }, [language]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
